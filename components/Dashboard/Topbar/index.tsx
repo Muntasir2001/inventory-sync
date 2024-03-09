@@ -1,3 +1,5 @@
+import Sidebar from '../Sidebar';
+
 const Topbar = () => {
 	return (
 		<>
@@ -13,22 +15,7 @@ const Topbar = () => {
 						</label>
 					</div>
 
-					<div className='drawer-side'>
-						<label
-							htmlFor='sidebar'
-							aria-label='close sidebar'
-							className='drawer-overlay'
-						></label>
-						<ul className='menu p-4 w-80 min-h-full bg-base-200 text-base-content'>
-							{/* Sidebar content here */}
-							<li>
-								<a>Sidebar Item 1</a>
-							</li>
-							<li>
-								<a>Sidebar Item 2</a>
-							</li>
-						</ul>
-					</div>
+					<Sidebar />
 				</div>
 
 				<h4 className='text-black font-bold text-xl text-center mx-auto'>
