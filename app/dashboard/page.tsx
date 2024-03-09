@@ -1,7 +1,11 @@
+import Statistics from '@/components/Statistics';
+
 const Dashboard = () => {
 	return (
 		<>
-			<div className=''>hello</div>
+			<div className='flex flex-col'>
+				<Statistics />
+			</div>
 		</>
 	);
 };
