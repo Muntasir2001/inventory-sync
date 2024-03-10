@@ -10,7 +10,9 @@ const Statistics = () => {
 				</div>
 				<div className='stats shadow rounded-md bg-dark-white w-full'>
 					<div className='stat'>
-						<div className='stat-title text-black'>Sale this month</div>
+						<div className='stat-title text-black break-words whitespace-break-spaces'>
+							Sales this month
+						</div>
 						<div className='stat-value text-black'>30</div>
 					</div>
 				</div>
