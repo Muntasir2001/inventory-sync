@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar';
 const Topbar = () => {
 	return (
 		<>
-			<div className='flex items-center w-full bg-primary py-4 px-3'>
+			<div className='flex items-center w-full bg-primary py-4 px-3 fixed'>
 				<div className='drawer w-auto mr-auto'>
 					<input id='sidebar' type='checkbox' className='drawer-toggle' />
 					<div className='drawer-content'>
