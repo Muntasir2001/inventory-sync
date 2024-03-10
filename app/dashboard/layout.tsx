@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import 'remixicon/fonts/remixicon.css';
 
-import Topbar from '@/components/Dashboard/Topbar';
+import Topbar from '@/components/Topbar';
 import '../globals.css';
 
 export const metadata: Metadata = {
