@@ -86,7 +86,7 @@ const AuthTabs = () => {
 										type='email'
 										id='email'
 										placeholder='Your email'
-										className='bg-tertiary text-black border-0'
+										className='bg-dark-white text-black border-0'
 									/>
 								</div>
 								<div className='space-y-1'>
@@ -97,7 +97,7 @@ const AuthTabs = () => {
 										id='password'
 										type='password'
 										placeholder='New password'
-										className='bg-tertiary text-black border-0'
+										className='bg-dark-white text-black border-0'
 									/>
 								</div>
 							</CardContent>
