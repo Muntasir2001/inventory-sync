@@ -10,14 +10,17 @@ import {
 const Statistics = () => {
 	return (
 		<>
-			<div className='flex flex-wrap'>
-				<div className='stats shadow rounded-md bg-dark-white'>
+			<div className='flex  justify-center gap-3 w-full py-6 px-5'>
+				<div className='stats shadow rounded-md bg-dark-white w-full'>
 					<div className='stat'>
-						<div className='stat-title text-black'>Total Page Views</div>
-						<div className='stat-value text-black'>89,400</div>
-						<div className='stat-desc text-black'>
-							21% more than last month
-						</div>
+						<div className='stat-title text-black'>Stock count</div>
+						<div className='stat-value text-black'>100</div>
+					</div>
+				</div>
+				<div className='stats shadow rounded-md bg-dark-white w-full'>
+					<div className='stat'>
+						<div className='stat-title text-black'>Sale this month</div>
+						<div className='stat-value text-black'>30</div>
 					</div>
 				</div>
 			</div>
