@@ -1,6 +1,14 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
 import Sidebar from '../Sidebar';
 
 const Topbar = () => {
+	const pathname = usePathname();
+
+	console.log(pathname);
+
 	return (
 		<>
 			<div className='flex items-center w-full bg-primary py-4 px-3 fixed'>

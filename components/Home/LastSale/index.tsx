@@ -4,7 +4,7 @@ const LastSale = () => {
 	return (
 		<>
 			<div className='flex flex-col gap-4 mt-10 pb-6 px-5'>
-				<h1 className='text-4xl font-bold text-black'>Last Sales</h1>
+				<h1 className='text-4xl font-bold text-black'>Last Sale</h1>
 
 				<SaleCard
 					iconClass='arrow-right-down-fill'
