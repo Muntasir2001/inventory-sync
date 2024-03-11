@@ -32,14 +32,17 @@ function StocksTable<TData, TValue>({
 
 	return (
 		<>
-			<div className='rounded-md border border-black text-black mx-5'>
+			<div className='rounded-sm border border-black text-black my-5 mx-5'>
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
 									return (
-										<TableHead key={header.id}>
+										<TableHead
+											className='font-bold text-black'
+											key={header.id}
+										>
 											{header.isPlaceholder
 												? null
 												: flexRender(
