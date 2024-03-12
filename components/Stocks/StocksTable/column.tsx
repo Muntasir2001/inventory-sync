@@ -31,10 +31,6 @@ export const columns = [
 		accessorKey: 'quantity',
 		header: 'Quantity',
 	},
-	{
-		accessorKey: 'status',
-		header: 'Status',
-	},
 ] as ColumnDef<Stock, unknown>[];
 
 // *** TEMP ***
