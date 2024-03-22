@@ -20,41 +20,58 @@ const StockList = () => {
 		name: string;
 		code: string;
 		status: Status;
+		description: string;
 	}> = [
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
 		{
 			name: 'Abaya Longggggggg',
 			code: 'AB-123',
 			status: Status.OUT_OF_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
+
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
+
 		{
 			name: 'Abaya Long',
 			code: 'AB-123',
 			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
 		},
 	];
 
@@ -87,6 +104,7 @@ const StockList = () => {
 							name={s.name}
 							code={s.code}
 							status={s.status}
+							description={s.description}
 							key={i}
 						/>
 					))}
