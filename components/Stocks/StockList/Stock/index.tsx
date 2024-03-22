@@ -24,12 +24,21 @@ const Stock = ({ name, code, status }: Props) => {
 					<i className='ri-box-3-fill text-black text-5xl' />
 				</div>
 				<div className='flex flex-col gap-2'>
-					<h3 className='text-2xl text-black font-medium max-w-[130px]'>
-						Abaya long
+					<h3 className='text-2xl text-black font-medium max-w-[140px] text-ellipsis whitespace-nowrap overflow-hidden'>
+						{name}
 					</h3>
-					<p className='text-black'>Code : AB-123</p>
+					<p className='text-black max-w-[145px] text-ellipsis whitespace-nowrap overflow-hidden'>
+						Code : {code}
+					</p>
 					<p className='text-black'>
-						Status : <span className='text-green'>In Stock</span>
+						Status :{' '}
+						<span
+							className={
+								status === Status.IN_STOCK ? 'text-green' : 'text-red'
+							}
+						>
+							{status === Status.IN_STOCK ? 'In Stock' : 'Out of stock'}
+						</span>
 					</p>
 				</div>
 				<DropdownMenu>
