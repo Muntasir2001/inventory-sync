@@ -5,7 +5,7 @@ import LastSale from '@/components/Home/LastSale';
 const Dashboard = () => {
 	return (
 		<>
-			<div className='flex flex-col bg-white pt-[70px]'>
+			<div className='flex flex-col bg-white py-[70px]'>
 				<Statistics />
 				<Buttons />
 				<LastSale />
