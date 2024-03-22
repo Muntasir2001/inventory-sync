@@ -29,7 +29,7 @@ const StockList = () => {
 		{
 			name: 'Abaya Longggggggg',
 			code: 'AB-123',
-			status: Status.IN_STOCK,
+			status: Status.OUT_OF_STOCK,
 		},
 		{
 			name: 'Abaya Long',
