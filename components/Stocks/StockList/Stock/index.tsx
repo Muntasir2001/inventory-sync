@@ -28,11 +28,11 @@ const Stock = ({ name, code, status, description }: Props) => {
 						<div className='bg-dark-white rounded-md p-5 flex items-center justify-center max-h-[96px]'>
 							<i className='ri-box-3-fill text-black text-5xl' />
 						</div>
-						<div className='flex flex-col gap-2'>
-							<h3 className='text-2xl text-black font-medium max-w-[140px] text-ellipsis whitespace-nowrap overflow-hidden'>
+						<div className='flex flex-col'>
+							<h3 className='text-xl text-black font-medium max-w-[140px] text-ellipsis whitespace-nowrap overflow-hidden'>
 								{name}
 							</h3>
-							<p className='text-black max-w-[145px] text-ellipsis whitespace-nowrap overflow-hidden'>
+							<p className='text-black max-w-[145px] text-ellipsis whitespace-nowrap overflow-hidden mt-2'>
 								Code : {code}
 							</p>
 							<p className='text-black'>
