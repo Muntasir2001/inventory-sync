@@ -25,8 +25,8 @@ const Stock = ({ name, code, status, description }: Props) => {
 			<Dialog>
 				<div className='flex gap-8'>
 					<DialogTrigger className='flex gap-8 h-full text-left'>
-						<div className='bg-dark-white rounded-md p-5 flex items-center justify-center max-h-[96px]'>
-							<i className='ri-box-3-fill text-black text-5xl' />
+						<div className='bg-dark-white rounded-md p-3 flex items-center justify-center max-h-[96px]'>
+							<i className='ri-box-3-fill text-black text-3xl' />
 						</div>
 						<div className='flex flex-col'>
 							<h3 className='text-xl text-black font-medium max-w-[140px] text-ellipsis whitespace-nowrap overflow-hidden'>
