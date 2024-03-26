@@ -13,15 +13,19 @@
    -  [ ] UI
    -  [ ] Frontend State management
    -  [ ] Backend
-2. View inventory
-   -  [ ] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
-3. View inventories
+1. Currency
+   -  _Configurable in settings_
+   -  symbol
+   -  name
+1. View inventory
    -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
-4. Manage inventory
+1. View inventories
+   -  [x] UI
+   -  [ ] Frontend State management
+   -  [ ] Backend
+1. Manage inventory
    -  Edit (all the fields)
       -  [ ] UI
       -  [ ] Frontend State management
