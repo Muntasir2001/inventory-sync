@@ -12,6 +12,7 @@ interface Props {
 	code: string;
 	status: Status;
 	description: string;
+	price: string;
 }
 
 export enum Status {
@@ -19,7 +20,7 @@ export enum Status {
 	OUT_OF_STOCK,
 }
 
-const Stock = ({ name, code, status, description }: Props) => {
+const Stock = ({ name, code, status, description, price }: Props) => {
 	return (
 		<>
 			<Dialog>
@@ -56,6 +57,7 @@ const Stock = ({ name, code, status, description }: Props) => {
 						code={code}
 						status={status}
 						description={description}
+						price={price}
 					/>
 					<DropdownMenu>
 						<DropdownMenuTrigger className='ml-auto outline-none'>

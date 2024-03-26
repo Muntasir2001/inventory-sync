@@ -7,12 +7,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import Stock, { Status } from './Stock';
 
 const StockList = () => {
@@ -21,6 +15,7 @@ const StockList = () => {
 		code: string;
 		status: Status;
 		description: string;
+		price: string;
 	}> = [
 		{
 			name: 'Abaya Long',
@@ -28,6 +23,7 @@ const StockList = () => {
 			status: Status.IN_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 		{
 			name: 'Abaya Longggggggg',
@@ -35,6 +31,7 @@ const StockList = () => {
 			status: Status.OUT_OF_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 		{
 			name: 'Abaya Long',
@@ -42,6 +39,7 @@ const StockList = () => {
 			status: Status.IN_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 		{
 			name: 'Abaya Long',
@@ -49,6 +47,7 @@ const StockList = () => {
 			status: Status.IN_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 		{
 			name: 'Abaya Long',
@@ -56,14 +55,7 @@ const StockList = () => {
 			status: Status.IN_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-		},
-
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 
 		{
@@ -72,6 +64,16 @@ const StockList = () => {
 			status: Status.IN_STOCK,
 			description:
 				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
+		},
+
+		{
+			name: 'Abaya Long',
+			code: 'AB-123',
+			status: Status.IN_STOCK,
+			description:
+				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
+			price: '£23.22',
 		},
 	];
 
@@ -105,6 +107,7 @@ const StockList = () => {
 							code={s.code}
 							status={s.status}
 							description={s.description}
+							price={s.price}
 							key={i}
 						/>
 					))}

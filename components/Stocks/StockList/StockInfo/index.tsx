@@ -11,9 +11,10 @@ interface Props {
 	code: string;
 	status: Status;
 	description: string;
+	price: string;
 }
 
-const StockInfo = ({ name, code, status, description }: Props) => {
+const StockInfo = ({ name, code, status, description, price }: Props) => {
 	return (
 		<>
 			<DialogContent>
@@ -30,6 +31,9 @@ const StockInfo = ({ name, code, status, description }: Props) => {
 				<div className='flex flex-col gap-1'>
 					<p className='text-black'>
 						<span className='font-bold'>Code:</span> {code}
+					</p>
+					<p className='text-black'>
+						<span className='font-bold'>Price:</span> {price}
 					</p>
 					<p className='text-black'>
 						<span className='font-bold'>Description:</span> {description}
