@@ -15,6 +15,7 @@
    -  [ ] Backend
 1. Currency
    -  _Configurable in settings_
+   -  id (primary - default field)
    -  symbol
    -  name
 1. View inventory
