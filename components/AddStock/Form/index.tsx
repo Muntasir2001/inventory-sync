@@ -18,15 +18,22 @@ import { Textarea } from '@/components/ui/textarea';
 
 const AddStockForm = () => {
 	const formSchema = z.object({
-		name: z.string().min(2).max(50),
+		name: z.string().max(50),
 		code: z.string(),
-		quantity: z.number(),
-		price: z.number(),
+		quantity: z.coerce.number(),
+		price: z.coerce.number(),
 		description: z.optional(z.string()),
 	});
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
+		defaultValues: {
+			name: '',
+			code: '',
+			quantity: 0,
+			price: 0,
+			description: '',
+		},
 	});
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
@@ -52,13 +59,13 @@ const AddStockForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className='border-black'
+										className='border-black text-black autofill:shadow-[inset_0_0_0px_1000px_#f1f2ee] autofill:text-black'
 										placeholder='Name of the item'
 										{...field}
 										required
 									/>
 								</FormControl>
-								<FormMessage />
+								<FormMessage className='text-red' />
 							</FormItem>
 						)}
 					/>
@@ -73,14 +80,14 @@ const AddStockForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className='border-black'
+										className='border-black text-black'
 										placeholder='Item code'
 										{...field}
 										type='number'
 										required
 									/>
 								</FormControl>
-								<FormMessage />
+								<FormMessage className='text-red' />
 							</FormItem>
 						)}
 					/>
@@ -95,21 +102,21 @@ const AddStockForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className='border-black'
+										className='border-black text-black'
 										placeholder='Quantity of the item'
 										{...field}
 										type='number'
 										required
 									/>
 								</FormControl>
-								<FormMessage />
+								<FormMessage className='text-red' />
 							</FormItem>
 						)}
 					/>
 
 					<FormField
 						control={form.control}
-						name='quantity'
+						name='price'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-black font-bold'>
@@ -117,14 +124,14 @@ const AddStockForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className='border-black'
+										className='border-black text-black'
 										placeholder='Price of each item'
 										{...field}
 										type='number'
 										required
 									/>
 								</FormControl>
-								<FormMessage />
+								<FormMessage className='text-red' />
 							</FormItem>
 						)}
 					/>
@@ -139,12 +146,12 @@ const AddStockForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Textarea
-										className='border-black'
+										className='border-black text-black'
 										placeholder='Description...'
 										{...field}
 									/>
 								</FormControl>
-								<FormMessage />
+								<FormMessage className='text-red' />
 							</FormItem>
 						)}
 					/>

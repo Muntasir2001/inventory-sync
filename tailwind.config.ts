@@ -44,7 +44,11 @@ const config = {
 			},
 		},
 	},
-	plugins: [require('tailwindcss-animate'), require('daisyui')],
+	plugins: [
+		require('tailwindcss-animate'),
+		require('daisyui'),
+		require('autoprefixer'),
+	],
 } satisfies Config;
 
 export default config;
