@@ -157,7 +157,7 @@ const AddStockForm = () => {
 					/>
 
 					<Button className='bg-secondary mt-5' type='submit'>
-						Add Stock
+						Add Item
 					</Button>
 				</form>
 			</Form>

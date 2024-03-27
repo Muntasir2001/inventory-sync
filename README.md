@@ -2,7 +2,7 @@
 
 ## Features (MVP)
 
-1. Store Inventory
+1. Add Item
    -  **Structure:**
       -  Code
       -  Name
@@ -18,15 +18,15 @@
    -  id (primary - default field)
    -  symbol
    -  name
-1. View inventory
+1. View item
    -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
-1. View inventories
+1. View items
    -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
-1. Manage inventory
+1. Manage items
    -  Edit (all the fields)
       -  [ ] UI
       -  [ ] Frontend State management
@@ -39,3 +39,8 @@
       -  [ ] UI
       -  [ ] Frontend State management
       -  [ ] Backend
+
+## Terminologies
+
+1. **Item:** single item or product
+2. **Stock:** inventory, a group of items - using stock because its short and easier to understand
