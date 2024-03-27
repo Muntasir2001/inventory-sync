@@ -10,7 +10,7 @@
       -  Quantity
       -  Price for each
       -  Pictures (maybe)
-   -  [ ] UI
+   -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
 1. Currency

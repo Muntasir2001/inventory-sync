@@ -5,6 +5,7 @@ import {
 	DialogTitle,
 } from '@/components/ui/dialog';
 import { Status } from '../Item';
+import { Button } from '@/components/ui/button';
 
 interface Props {
 	name: string;
@@ -38,6 +39,10 @@ const ItemInfo = ({ name, code, status, description, price }: Props) => {
 					<p className='text-black'>
 						<span className='font-bold'>Description:</span> {description}
 					</p>
+					<div className='flex gap-3 mt-8'>
+						<Button className='bg-secondary'>Edit</Button>
+						<Button className='text-white bg-red'>Delete</Button>
+					</div>
 				</div>
 			</DialogContent>
 		</>
