@@ -5,7 +5,7 @@ const Sidebar = () => {
 		{ href: '/dashboard', text: 'Home' },
 		{ href: '/dashboard/stocks', text: 'Stocks' },
 		{ href: '/', text: 'Sales' },
-		{ href: '/add-stock', text: 'Add Stock' },
+		{ href: '/dashboard/add-stock', text: 'Add Stock' },
 		{ href: '/', text: 'Make a Sale' },
 	];
 
