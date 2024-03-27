@@ -4,7 +4,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog';
-import { Status } from '../Stock';
+import { Status } from '../Item';
 
 interface Props {
 	name: string;
@@ -14,7 +14,7 @@ interface Props {
 	price: string;
 }
 
-const StockInfo = ({ name, code, status, description, price }: Props) => {
+const ItemInfo = ({ name, code, status, description, price }: Props) => {
 	return (
 		<>
 			<DialogContent>
@@ -44,4 +44,4 @@ const StockInfo = ({ name, code, status, description, price }: Props) => {
 	);
 };
 
-export default StockInfo;
+export default ItemInfo;

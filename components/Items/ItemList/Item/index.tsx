@@ -5,7 +5,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import StockInfo from '../StockInfo';
+import ItemInfo from '../ItemInfo';
 
 interface Props {
 	name: string;
@@ -20,7 +20,7 @@ export enum Status {
 	OUT_OF_STOCK,
 }
 
-const Stock = ({ name, code, status, description, price }: Props) => {
+const Item = ({ name, code, status, description, price }: Props) => {
 	return (
 		<>
 			<Dialog>
@@ -52,7 +52,7 @@ const Stock = ({ name, code, status, description, price }: Props) => {
 							</p>
 						</div>
 					</DialogTrigger>
-					<StockInfo
+					<ItemInfo
 						name={name}
 						code={code}
 						status={status}
@@ -78,4 +78,4 @@ const Stock = ({ name, code, status, description, price }: Props) => {
 	);
 };
 
-export default Stock;
+export default Item;

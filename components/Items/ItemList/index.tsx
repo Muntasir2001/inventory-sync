@@ -7,10 +7,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import Stock, { Status } from './Stock';
+import Item, { Status } from './Item';
 
-const StockList = () => {
-	const stocks: Array<{
+const ItemList = () => {
+	const items: Array<{
 		name: string;
 		code: string;
 		status: Status;
@@ -101,8 +101,8 @@ const StockList = () => {
 					</Select>
 				</div>
 				<div className='flex flex-col gap-6 overflow-y-auto'>
-					{stocks.map((s, i) => (
-						<Stock
+					{items.map((s, i) => (
+						<Item
 							name={s.name}
 							code={s.code}
 							status={s.status}
@@ -117,4 +117,4 @@ const StockList = () => {
 	);
 };
 
-export default StockList;
+export default ItemList;

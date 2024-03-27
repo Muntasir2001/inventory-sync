@@ -3,9 +3,9 @@ import SidebarLink from './SidebarLink';
 const Sidebar = () => {
 	const links: Array<{ href: string; text: string }> = [
 		{ href: '/dashboard', text: 'Home' },
-		{ href: '/dashboard/stocks', text: 'Stocks' },
+		{ href: '/dashboard/items', text: 'Items' },
 		{ href: '/', text: 'Sales' },
-		{ href: '/dashboard/add-stock', text: 'Add Stock' },
+		{ href: '/dashboard/add-item', text: 'Add Item' },
 		{ href: '/', text: 'Make a Sale' },
 	];
 

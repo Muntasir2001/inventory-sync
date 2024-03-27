@@ -4,7 +4,7 @@ const Statistics = () => {
 			<div className='flex  justify-center gap-3 w-full py-6 px-5'>
 				<div className='stats shadow rounded-md bg-dark-white w-full'>
 					<div className='stat'>
-						<div className='stat-title text-black'>Stock count</div>
+						<div className='stat-title text-black'>Item count</div>
 						<div className='stat-value text-black'>100</div>
 					</div>
 				</div>

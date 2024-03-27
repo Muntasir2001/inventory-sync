@@ -1,6 +1,6 @@
-import Form from '@/components/AddStock/Form';
+import Form from '@/components/AddItem/Form';
 
-const AddStock = () => {
+const AddItem = () => {
 	return (
 		<>
 			<div className='flex flex-col bg-white py-[70px] mx-5'>
@@ -10,4 +10,4 @@ const AddStock = () => {
 	);
 };
 
-export default AddStock;
+export default AddItem;
