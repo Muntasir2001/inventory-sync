@@ -7,76 +7,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import Item, { Status } from './Item';
+import Item from './Item';
+import items from '@/data/items';
 
 const ItemList = () => {
-	const items: Array<{
-		name: string;
-		code: string;
-		status: Status;
-		description: string;
-		price: string;
-	}> = [
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-		{
-			name: 'Abaya Longggggggg',
-			code: 'AB-123',
-			status: Status.OUT_OF_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-
-		{
-			name: 'Abaya Long',
-			code: 'AB-123',
-			status: Status.IN_STOCK,
-			description:
-				'Soft, luxurious velvet cloth in deep midnight blue, whispering tales of elegance and sophistication with every touch.',
-			price: '£23.22',
-		},
-	];
-
 	return (
 		<>
 			<div className='flex flex-col gap-12 mt-6'>
@@ -103,11 +37,13 @@ const ItemList = () => {
 				<div className='flex flex-col gap-6 overflow-y-auto'>
 					{items.map((s, i) => (
 						<Item
+							id={s.id}
 							name={s.name}
 							code={s.code}
 							status={s.status}
 							description={s.description}
-							price={s.price}
+							price={`£${s.price}`}
+							quantity={s.quantity}
 							key={i}
 						/>
 					))}

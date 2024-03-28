@@ -1,21 +1,33 @@
+import Link from 'next/link';
+
 import {
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog';
-import { Status } from '../Item';
 import { Button } from '@/components/ui/button';
+import { Status } from '@/data/items';
 
 interface Props {
+	id: number;
 	name: string;
 	code: string;
 	status: Status;
 	description: string;
 	price: string;
+	quantity: number;
 }
 
-const ItemInfo = ({ name, code, status, description, price }: Props) => {
+const ItemInfo = ({
+	id,
+	name,
+	code,
+	status,
+	description,
+	price,
+	quantity,
+}: Props) => {
 	return (
 		<>
 			<DialogContent>
@@ -37,10 +49,15 @@ const ItemInfo = ({ name, code, status, description, price }: Props) => {
 						<span className='font-bold'>Price:</span> {price}
 					</p>
 					<p className='text-black'>
+						<span className='font-bold'>Quantity:</span> {quantity}
+					</p>
+					<p className='text-black'>
 						<span className='font-bold'>Description:</span> {description}
 					</p>
 					<div className='flex gap-3 mt-8'>
-						<Button className='bg-secondary'>Edit</Button>
+						<Link href={`/dashboard/edit-item/${id}`}>
+							<Button className='bg-secondary'>Edit</Button>
+						</Link>
 						<Button className='text-white bg-red'>Delete</Button>
 					</div>
 				</div>

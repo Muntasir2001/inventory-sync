@@ -6,21 +6,27 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import ItemInfo from '../ItemInfo';
+import { Status } from '@/data/items';
 
 interface Props {
+	id: number;
 	name: string;
 	code: string;
 	status: Status;
 	description: string;
 	price: string;
+	quantity: number;
 }
 
-export enum Status {
-	IN_STOCK,
-	OUT_OF_STOCK,
-}
-
-const Item = ({ name, code, status, description, price }: Props) => {
+const Item = ({
+	id,
+	name,
+	code,
+	status,
+	description,
+	price,
+	quantity,
+}: Props) => {
 	return (
 		<>
 			<Dialog>
@@ -53,11 +59,13 @@ const Item = ({ name, code, status, description, price }: Props) => {
 						</div>
 					</DialogTrigger>
 					<ItemInfo
+						id={id}
 						name={name}
 						code={code}
 						status={status}
 						description={description}
 						price={price}
+						quantity={quantity}
 					/>
 					<DropdownMenu>
 						<DropdownMenuTrigger className='ml-auto outline-none'>
