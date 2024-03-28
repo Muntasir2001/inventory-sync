@@ -28,7 +28,7 @@
    -  [ ] Backend
 1. Manage items
    -  Edit (all the fields)
-      -  [ ] UI
+      -  [x] UI
       -  [ ] Frontend State management
       -  [ ] Backend
    -  Delete
