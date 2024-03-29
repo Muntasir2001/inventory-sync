@@ -43,6 +43,10 @@
    -  [ ] UI
    -  [ ] Frontend State management
    -  [ ] Backend
+1. See all Sales
+   -  [ ] UI
+   -  [ ] Frontend State management
+   -  [ ] Backend
 
 ## Terminologies
 
