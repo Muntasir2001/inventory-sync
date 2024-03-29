@@ -8,6 +8,8 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Status } from '@/data/items';
+import { AlertDialogTrigger, AlertDialog } from '@/components/ui/alert-dialog';
+import ItemDeleteAlertDialog from '../ItemDeleteAlertDialog';
 
 interface Props {
 	id: number;
@@ -56,9 +58,16 @@ const ItemInfo = ({
 					</p>
 					<div className='flex gap-3 mt-8'>
 						<Link href={`/dashboard/edit-item/${id}`}>
-							<Button className='bg-secondary'>Edit</Button>
+							<Button className='bg-dark-white text-black'>Edit</Button>
 						</Link>
-						<Button className='text-white bg-red'>Delete</Button>
+						<AlertDialog>
+							<AlertDialogTrigger asChild>
+								<Button className='text-white bg-dark-red'>
+									Delete
+								</Button>
+							</AlertDialogTrigger>
+							<ItemDeleteAlertDialog />
+						</AlertDialog>
 					</div>
 				</div>
 			</DialogContent>

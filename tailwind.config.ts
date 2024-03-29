@@ -27,6 +27,7 @@ const config = {
 				black: '#1e1e1e',
 				green: '#689088',
 				red: '#B5838B',
+				'dark-red': '#db3c30',
 			},
 			keyframes: {
 				'accordion-down': {
