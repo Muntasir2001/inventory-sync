@@ -7,7 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import Item from './Item';
+import Item from '../Item';
 import items from '@/data/items';
 
 const ItemList = () => {

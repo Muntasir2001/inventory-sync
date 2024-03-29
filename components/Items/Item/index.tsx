@@ -7,6 +7,8 @@ import {
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import ItemInfo from '../ItemInfo';
 import { Status } from '@/data/items';
+import { AlertDialogTrigger, AlertDialog } from '@/components/ui/alert-dialog';
+import ItemDeleteAlertDialog from '../ItemDeleteAlertDialog';
 
 interface Props {
 	id: number;
@@ -67,19 +69,24 @@ const Item = ({
 						price={price}
 						quantity={quantity}
 					/>
-					<DropdownMenu>
-						<DropdownMenuTrigger className='ml-auto outline-none'>
-							<i className='ri-menu-line text-black text-3xl' />
-						</DropdownMenuTrigger>
-						<DropdownMenuContent className='text-black mr-4'>
-							<DropdownMenuItem className='font-medium text-xl active:bg-dark-white'>
-								Edit
-							</DropdownMenuItem>
-							<DropdownMenuItem className='text-red font-medium text-xl active:bg-dark-white'>
-								Delete
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
+					<AlertDialog>
+						<DropdownMenu>
+							<DropdownMenuTrigger className='ml-auto outline-none'>
+								<i className='ri-menu-line text-black text-3xl' />
+							</DropdownMenuTrigger>
+							<DropdownMenuContent className='text-black mr-4'>
+								<DropdownMenuItem className='font-medium active:bg-dark-white'>
+									Edit
+								</DropdownMenuItem>
+								<AlertDialogTrigger asChild>
+									<DropdownMenuItem className='text-dark-red font-medium active:bg-dark-white'>
+										Delete
+									</DropdownMenuItem>
+								</AlertDialogTrigger>
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<ItemDeleteAlertDialog />
+					</AlertDialog>
 				</div>
 			</Dialog>
 		</>

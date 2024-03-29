@@ -32,13 +32,17 @@
       -  [ ] Frontend State management
       -  [ ] Backend
    -  Delete
+      -  [x] UI
+      -  [ ] Frontend State management
+      -  [ ] Backend
+   -  Update quantiy when there is a sale (this would done throught **Make Sale** page)
       -  [ ] UI
       -  [ ] Frontend State management
       -  [ ] Backend
-   -  Update quantiy when there is a sale
-      -  [ ] UI
-      -  [ ] Frontend State management
-      -  [ ] Backend
+1. Make Sale
+   -  [ ] UI
+   -  [ ] Frontend State management
+   -  [ ] Backend
 
 ## Terminologies
 
