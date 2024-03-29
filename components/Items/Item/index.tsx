@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -75,9 +77,11 @@ const Item = ({
 								<i className='ri-menu-line text-black text-3xl' />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent className='text-black mr-4'>
-								<DropdownMenuItem className='font-medium active:bg-dark-white'>
-									Edit
-								</DropdownMenuItem>
+								<Link href={`/dashboard/edit-item/${id}`}>
+									<DropdownMenuItem className='font-medium active:bg-dark-white'>
+										Edit
+									</DropdownMenuItem>
+								</Link>
 								<AlertDialogTrigger asChild>
 									<DropdownMenuItem className='text-dark-red font-medium active:bg-dark-white'>
 										Delete
