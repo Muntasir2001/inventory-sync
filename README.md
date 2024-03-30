@@ -44,7 +44,7 @@
    -  [ ] Frontend State management
    -  [ ] Backend
 1. See all Sales
-   -  [ ] UI
+   -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
 
