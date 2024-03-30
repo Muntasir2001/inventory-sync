@@ -4,9 +4,9 @@ const Sidebar = () => {
 	const links: Array<{ href: string; text: string }> = [
 		{ href: '/dashboard', text: 'Home' },
 		{ href: '/dashboard/items', text: 'Items' },
-		{ href: '/', text: 'Sales' },
+		{ href: '/dashboard/sales', text: 'Sales' },
 		{ href: '/dashboard/add-item', text: 'Add Item' },
-		{ href: '/', text: 'Make a Sale' },
+		{ href: '/dashboard/make-sale', text: 'Make a Sale' },
 	];
 
 	return (
