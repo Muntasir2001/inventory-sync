@@ -35,8 +35,6 @@ const MakeSaleForm = () => {
 
 	const selectItems = items.map((i) => ({ label: i.name, value: i.id }));
 
-	console.log(selectItems);
-
 	const FormSchema = z.object({
 		item: z.number({
 			required_error: 'Please select a item.',
