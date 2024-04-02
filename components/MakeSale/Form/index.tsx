@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +10,7 @@ import {
 	CommandGroup,
 	CommandInput,
 	CommandItem,
+	CommandList,
 } from '@/components/ui/command';
 import {
 	Popover,
@@ -30,9 +29,6 @@ import {
 import items from '@/data/items';
 
 const MakeSaleForm = () => {
-	const [open, setOpen] = useState<boolean>(false);
-	const [value, setValue] = useState<string>('');
-
 	const selectItems = items.map((i) => ({ label: i.name, value: i.id }));
 
 	const FormSchema = z.object({
@@ -82,35 +78,33 @@ const MakeSaleForm = () => {
 									</PopoverTrigger>
 									<PopoverContent className='w-[200px] p-0'>
 										<Command>
-											<CommandInput placeholder='Search language...' />
-											<CommandEmpty>No language found.</CommandEmpty>
-											<CommandGroup>
-												{selectItems.map((s) => (
-													<CommandItem
-														value={s.label}
-														key={s.value}
-														onSelect={() => {
-															form.setValue('item', s.value);
-														}}
-													>
-														<i
-															className={`ri-check-line mr-2 text-2xl ${
-																s.value === field.value
-																	? 'opacity-100'
-																	: 'opacity-0'
-															}`}
-														/>
-														{s.label}
-													</CommandItem>
-												))}
-											</CommandGroup>
+											<CommandInput placeholder='Search items...' />
+											<CommandList>
+												<CommandEmpty>No items found.</CommandEmpty>
+												<CommandGroup>
+													{selectItems.map((s) => (
+														<CommandItem
+															value={s.label}
+															key={s.value}
+															onSelect={() => {
+																form.setValue('item', s.value);
+															}}
+														>
+															<i
+																className={`ri-check-line mr-2 text-2xl ${
+																	s.value === field.value
+																		? 'opacity-100'
+																		: 'opacity-0'
+																}`}
+															/>
+															{s.label}
+														</CommandItem>
+													))}
+												</CommandGroup>
+											</CommandList>
 										</Command>
 									</PopoverContent>
 								</Popover>
-								<FormDescription>
-									This is the language that will be used in the
-									dashboard.
-								</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
