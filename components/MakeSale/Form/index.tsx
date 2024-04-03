@@ -81,12 +81,12 @@ const MakeSaleForm = () => {
 											</Button>
 										</FormControl>
 									</PopoverTrigger>
-									<PopoverContent className='w-[200px] p-0'>
+									<PopoverContent className='p-0'>
 										<Command>
 											<CommandInput placeholder='Search items...' />
-											<CommandList className='bg-white'>
+											<CommandList>
 												<CommandEmpty>No items found.</CommandEmpty>
-												<CommandGroup className='bg-white'>
+												<CommandGroup>
 													{selectItems.map((s) => (
 														<CommandItem
 															value={s.label}
