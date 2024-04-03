@@ -50,20 +50,25 @@ const MakeSaleForm = () => {
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+				<form
+					onSubmit={form.handleSubmit(onSubmit)}
+					className='space-y-6 my-8'
+				>
 					<FormField
 						control={form.control}
 						name='item'
 						render={({ field }) => (
 							<FormItem className='flex flex-col'>
-								<FormLabel>Select item you sold</FormLabel>
+								<FormLabel className='text-black'>
+									Select item you sold
+								</FormLabel>
 								<Popover>
 									<PopoverTrigger asChild>
 										<FormControl>
 											<Button
 												variant='outline'
 												role='combobox'
-												className={`w-[200px] justify-between ${
+												className={`border-black text-black justify-between ${
 													!field.value && 'text-muted-foreground'
 												}`}
 											>
@@ -79,9 +84,9 @@ const MakeSaleForm = () => {
 									<PopoverContent className='w-[200px] p-0'>
 										<Command>
 											<CommandInput placeholder='Search items...' />
-											<CommandList>
+											<CommandList className='bg-white'>
 												<CommandEmpty>No items found.</CommandEmpty>
-												<CommandGroup>
+												<CommandGroup className='bg-white'>
 													{selectItems.map((s) => (
 														<CommandItem
 															value={s.label}
