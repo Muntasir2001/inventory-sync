@@ -27,6 +27,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import items from '@/data/items';
+import { Input } from '@/components/ui/input';
 
 const MakeSaleForm = () => {
 	const selectItems = items.map((i) => ({ label: i.name, value: i.id }));
@@ -94,6 +95,7 @@ const MakeSaleForm = () => {
 															onSelect={() => {
 																form.setValue('item', s.value);
 															}}
+															className='hover:dark-white'
 														>
 															<i
 																className={`ri-check-line mr-2 text-2xl ${
@@ -114,7 +116,31 @@ const MakeSaleForm = () => {
 							</FormItem>
 						)}
 					/>
-					<Button type='submit'>Submit</Button>
+
+					<FormField
+						control={form.control}
+						name='title'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-black font-bold'>
+									Title
+								</FormLabel>
+								<FormControl>
+									<Input
+										className='border-black text-black autofill:shadow-[inset_0_0_0px_1000px_#f1f2ee] autofill:text-black'
+										placeholder='Unique title? Eg: Abaya sale'
+										{...field}
+										required
+									/>
+								</FormControl>
+								<FormMessage className='text-red' />
+							</FormItem>
+						)}
+					/>
+
+					<Button className='bg-secondary mt-5' type='submit'>
+						Submit
+					</Button>
 				</form>
 			</Form>
 		</>
