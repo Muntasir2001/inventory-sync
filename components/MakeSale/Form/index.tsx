@@ -138,6 +138,28 @@ const MakeSaleForm = () => {
 						)}
 					/>
 
+					<FormField
+						control={form.control}
+						name='quantity'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-black font-bold'>
+									Quantity
+								</FormLabel>
+								<FormControl>
+									<Input
+										className='border-black text-black autofill:shadow-[inset_0_0_0px_1000px_#f1f2ee] autofill:text-black'
+										placeholder='Quantity sold'
+										{...field}
+										type='number'
+										required
+									/>
+								</FormControl>
+								<FormMessage className='text-red' />
+							</FormItem>
+						)}
+					/>
+
 					<Button className='bg-secondary mt-5' type='submit'>
 						Submit
 					</Button>
