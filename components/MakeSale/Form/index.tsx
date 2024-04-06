@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,8 +30,11 @@ import {
 } from '@/components/ui/form';
 import items from '@/data/items';
 import { Input } from '@/components/ui/input';
+import { Calendar } from '@/components/ui/calendar';
 
 const MakeSaleForm = () => {
+	const [saleDate, setSaleDate] = useState<Date | undefined>(new Date());
+
 	const selectItems = items.map((i) => ({ label: i.name, value: i.id }));
 
 	const FormSchema = z.object({
@@ -60,7 +65,7 @@ const MakeSaleForm = () => {
 						name='item'
 						render={({ field }) => (
 							<FormItem className='flex flex-col'>
-								<FormLabel className='text-black'>
+								<FormLabel className='text-black font-bold'>
 									Select item you sold
 								</FormLabel>
 								<Popover>
@@ -153,6 +158,49 @@ const MakeSaleForm = () => {
 										{...field}
 										type='number'
 										required
+									/>
+								</FormControl>
+								<FormMessage className='text-red' />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name='price'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-black font-bold'>
+									Price
+								</FormLabel>
+								<FormControl>
+									<Input
+										className='border-black text-black autofill:shadow-[inset_0_0_0px_1000px_#f1f2ee] autofill:text-black'
+										placeholder='Total price'
+										{...field}
+										type='number'
+										required
+									/>
+								</FormControl>
+								<FormMessage className='text-red' />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name='saleDate'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-black font-bold'>
+									Sale Date
+								</FormLabel>
+								<FormControl>
+									<Calendar
+										mode='single'
+										selected={saleDate}
+										onSelect={setSaleDate}
+										className='rounded-md border -z-10'
 									/>
 								</FormControl>
 								<FormMessage className='text-red' />

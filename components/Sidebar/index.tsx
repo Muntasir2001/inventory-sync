@@ -11,7 +11,7 @@ const Sidebar = () => {
 
 	return (
 		<>
-			<div className='drawer-side'>
+			<div className='drawer-side z-50'>
 				<label
 					htmlFor='sidebar'
 					aria-label='close sidebar'
