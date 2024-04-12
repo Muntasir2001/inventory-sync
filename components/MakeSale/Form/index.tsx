@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { format } from 'date-fns';
 
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -192,16 +193,44 @@ const MakeSaleForm = () => {
 						name='saleDate'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel className='text-black font-bold'>
+								<FormLabel className='text-black font-bold block'>
 									Sale Date
 								</FormLabel>
 								<FormControl>
-									<Calendar
-										mode='single'
-										selected={saleDate}
-										onSelect={setSaleDate}
-										className='rounded-md border -z-10'
-									/>
+									<Popover>
+										<PopoverTrigger asChild>
+											<Button
+												variant={'outline'}
+												className='pl-3 text-left font-normal border-black w-full'
+											>
+												{saleDate ? (
+													<span className='text-black'>
+														{format(saleDate, 'PPP')}
+													</span>
+												) : (
+													<span className='text-slate-500'>
+														Search by sale date
+													</span>
+												)}
+												<i className='ri-calendar-view ml-auto text-xl text-slate-500' />
+											</Button>
+										</PopoverTrigger>
+										<PopoverContent
+											className='w-auto p-0'
+											align='start'
+										>
+											<Calendar
+												mode='single'
+												selected={saleDate}
+												onSelect={setSaleDate}
+												disabled={(date) =>
+													date > new Date() ||
+													date < new Date('1900-01-01')
+												}
+												initialFocus
+											/>
+										</PopoverContent>
+									</Popover>
 								</FormControl>
 								<FormMessage className='text-red' />
 							</FormItem>
@@ -209,7 +238,7 @@ const MakeSaleForm = () => {
 					/>
 
 					<Button className='bg-secondary mt-5' type='submit'>
-						Submit
+						Add Sale
 					</Button>
 				</form>
 			</Form>
