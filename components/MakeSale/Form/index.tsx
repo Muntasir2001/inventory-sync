@@ -23,7 +23,6 @@ import {
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -101,7 +100,11 @@ const MakeSaleForm = () => {
 															onSelect={() => {
 																form.setValue('item', s.value);
 															}}
-															className='hover:dark-white'
+															className={`aria-selected:bg-dark-white ${
+																s.value === field.value
+																	? 'bg-primary hover:bg-primary aria-selected:bg-primary'
+																	: 'bg-white'
+															}`}
 														>
 															<i
 																className={`ri-check-line mr-2 text-2xl ${
@@ -209,7 +212,7 @@ const MakeSaleForm = () => {
 													</span>
 												) : (
 													<span className='text-slate-500'>
-														Search by sale date
+														Sale date
 													</span>
 												)}
 												<i className='ri-calendar-view ml-auto text-xl text-slate-500' />

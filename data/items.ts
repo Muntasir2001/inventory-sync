@@ -14,7 +14,7 @@ const items: Array<{
 }> = [
 	{
 		id: 1,
-		name: 'Abaya Long',
+		name: 'Abaya Longg',
 		code: 'AB',
 		status: Status.IN_STOCK,
 		description:
@@ -24,7 +24,7 @@ const items: Array<{
 	},
 	{
 		id: 2,
-		name: 'Abaya Longggggggg',
+		name: 'Abaya Short',
 		code: 'AB-123',
 		status: Status.OUT_OF_STOCK,
 		description:
@@ -34,7 +34,7 @@ const items: Array<{
 	},
 	{
 		id: 10,
-		name: 'Abaya Long',
+		name: 'Abaya Medium',
 		code: 'AB-123',
 		status: Status.IN_STOCK,
 		description:
@@ -44,7 +44,7 @@ const items: Array<{
 	},
 	{
 		id: 3,
-		name: 'Abaya Long',
+		name: 'Abaya Blck',
 		code: 'AB-123',
 		status: Status.IN_STOCK,
 		description:
@@ -54,7 +54,7 @@ const items: Array<{
 	},
 	{
 		id: 4,
-		name: 'Abaya Long',
+		name: 'Abaya Blue',
 		code: 'AB-123',
 		status: Status.IN_STOCK,
 		description:
@@ -65,7 +65,7 @@ const items: Array<{
 
 	{
 		id: 11,
-		name: 'Abaya Long',
+		name: 'Abaya red',
 		code: 'AB-123',
 		status: Status.IN_STOCK,
 		description:
@@ -76,7 +76,7 @@ const items: Array<{
 
 	{
 		id: 12,
-		name: 'Abaya Long',
+		name: 'Abaya Pink',
 		code: 'AB-123',
 		status: Status.IN_STOCK,
 		description:
