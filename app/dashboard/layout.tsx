@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import 'remixicon/fonts/remixicon.css';
+import { DataWrapper } from '@/context/Context';
 
 import Topbar from '@/components/Topbar';
 import '../globals.css';
@@ -15,9 +16,11 @@ export default function DashboardLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<div className={`min-h-screen bg-white`}>
-			<Topbar />
-			{children}
-		</div>
+		<DataWrapper>
+			<div className={`min-h-screen bg-white`}>
+				<Topbar />
+				{children}
+			</div>
+		</DataWrapper>
 	);
 }

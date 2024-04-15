@@ -17,7 +17,7 @@ const DataContext = createContext<{
 }>({ state: InitialState, dispatch: () => undefined });
 
 interface props {
-	children: any;
+	children: React.ReactNode;
 }
 
 export const DataWrapper = ({ children }: props) => {

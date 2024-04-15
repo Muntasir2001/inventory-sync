@@ -1,3 +1,5 @@
+import items from '@/data/items';
+
 /* 
 	** Required action types **
 	- item
@@ -75,7 +77,7 @@ export interface InitialStateType {
 }
 
 export const InitialState: InitialStateType = {
-	items: [],
+	items: items,
 	sales: [],
 	user: {},
 };
