@@ -61,3 +61,9 @@
 
 1. **Item:** single item or product
 2. **Stock:** inventory, a group of items - using stock because its short and easier to understand
+
+## Database Structure
+
+<kbd>
+<img src="./public/diagrams/db-diagram.png" alt="diagram" width="500px">
+</kbd>
