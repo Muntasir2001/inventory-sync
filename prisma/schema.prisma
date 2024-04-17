@@ -9,12 +9,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model Users {
-  id        Int      @id @default(autoincrement())
+  id        Int      @id @default(sequence())
   createdAt DateTime @default(now())
   firstName String
   lastName  String
@@ -23,7 +23,7 @@ model Users {
 }
 
 model Currencies {
-  id     Int     @id @default(autoincrement())
+  id     Int     @id @default(sequence())
   name   String
   symbol String
   items  Items[]
@@ -31,7 +31,7 @@ model Currencies {
 }
 
 model Items {
-  id          Int        @id @default(autoincrement())
+  id          Int        @id @default(sequence())
   code        String
   name        String
   description String
@@ -45,7 +45,7 @@ model Items {
 }
 
 model Sales {
-  id         Int        @id @default(autoincrement())
+  id         Int        @id @default(sequence())
   title      String
   quantity   Int
   price      BigInt
