@@ -12,3 +12,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  firstName String
+  lastName  String
+  email     String
+  items     Items[]
+}
+
+model Currencies {
+  id     Int     @id @default(autoincrement())
+  name   String
+  symbol String
+  items  Items[]
+  sales  Sales[]
+}
+
+model Items {
+  id          Int        @id @default(autoincrement())
+  code        String
+  name        String
+  description String
+  quantity    Int
+  price       BigInt // price for each
+  currencyId  Int
+  userId      Int
+  sales       Sales[]
+  currency    Currencies @relation(fields: [currencyId], references: [id])
+  user        Users      @relation(fields: [userId], references: [id])
+}
+
+model Sales {
+  id         Int        @id @default(autoincrement())
+  title      String
+  quantity   Int
+  price      BigInt
+  currencyId Int
+  itemId     Int
+  currency   Currencies @relation(fields: [currencyId], references: [id])
+  item       Items      @relation(fields: [itemId], references: [id])
+}
