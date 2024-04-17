@@ -38,11 +38,17 @@
    -  Update quantity when there is a sale (this would done through **Make Sale** page)
       -  [ ] Frontend State management
       -  [ ] Backend
-1. Make Sale
+1. See all Sales
+   -  **Structure:**
+      -  Item sold
+      -  Title
+      -  Quantity
+      -  Price sold
+      -  Sale date
    -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
-1. See all Sales
+1. Make Sale
    -  [x] UI
    -  [ ] Frontend State management
    -  [ ] Backend
