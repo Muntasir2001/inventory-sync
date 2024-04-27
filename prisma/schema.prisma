@@ -20,6 +20,7 @@ model Users {
   lastName  String
   email     String
   items     Items[]
+  password  String
 }
 
 model Currencies {
