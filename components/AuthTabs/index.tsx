@@ -12,8 +12,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useFormState, useFormStatus } from 'react-dom';
+import { authenticate } from '@/lib/actions';
 
 const AuthTabs = () => {
+	const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
 	return (
 		<>
 			<div className='flex flex-col items-center justify-center h-full'>
