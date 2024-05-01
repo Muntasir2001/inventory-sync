@@ -1,12 +1,16 @@
+'use server';
+
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 export async function authenticate(
 	prevState: string | undefined,
-	formData: FormData,
+	email: string,
+	password: string,
 ) {
 	try {
-		await signIn('credentials', formData);
+		console.log('ehllo');
+		await signIn('credentials', { email, password });
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {

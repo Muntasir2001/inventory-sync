@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
 	Card,
@@ -12,11 +14,25 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/lib/actions';
 
 const AuthTabs = () => {
-	const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+
+	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setEmail(e.currentTarget.value);
+	};
+
+	const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.currentTarget.value);
+	};
+
+	const onLoginButtonClick = (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	) => {
+		authenticate(undefined, email, password);
+	};
 
 	return (
 		<>
@@ -54,6 +70,8 @@ const AuthTabs = () => {
 										id='email'
 										placeholder='Your email'
 										className='bg-dark-white text-black border-0'
+										onChange={onEmailChange}
+										value={email}
 									/>
 								</div>
 								<div className='space-y-1'>
@@ -65,11 +83,16 @@ const AuthTabs = () => {
 										type='password'
 										placeholder='Your password'
 										className='bg-dark-white text-black border-0'
+										onChange={onPasswordChange}
+										value={password}
 									/>
 								</div>
 							</CardContent>
 							<CardFooter>
-								<Button className='bg-primary text-black hover:bg-primary hover:brightness-90'>
+								<Button
+									onClick={onLoginButtonClick}
+									className='bg-primary text-black hover:bg-primary hover:brightness-90'
+								>
 									Login
 								</Button>
 							</CardFooter>
