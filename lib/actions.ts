@@ -9,13 +9,15 @@ export async function authenticate(
 	password: string,
 ) {
 	try {
-		console.log('ehllo');
 		await signIn('credentials', { email, password });
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {
 				case 'CredentialsSignin':
-					return 'Invalid credentials.';
+					return {
+						type: 'error',
+						error: 'Invalid credentials.',
+					};
 				default:
 					return 'Something went wrong.';
 			}

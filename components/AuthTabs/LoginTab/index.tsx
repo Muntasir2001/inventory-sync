@@ -30,7 +30,11 @@ const LoginTab = () => {
 	const onLoginButtonClick = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
-		authenticate(undefined, email, password);
+		try {
+			console.log(authenticate(undefined, email, password));
+		} catch (err) {
+			console.log('error', err);
+		}
 	};
 
 	return (
