@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import toast from 'react-hot-toast';
+
 import { Button } from '@/components/ui/button';
 import {
 	Card,
@@ -27,14 +29,25 @@ const LoginTab = () => {
 		setPassword(e.currentTarget.value);
 	};
 
-	const onLoginButtonClick = (
+	const onLoginButtonClick = async (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
-		try {
-			console.log(authenticate(undefined, email, password));
-		} catch (err) {
-			console.log('error', err);
+		const toastId = toast.loading('Logging you in...');
+
+		const res = await authenticate(undefined, email, password);
+
+		if (res?.type === 'error') {
+			toast.error(res.error, {
+				id: toastId,
+				duration: 10000,
+			});
+
+			return;
 		}
+
+		toast.success('Signed In Successfully!', {
+			id: toastId,
+		});
 	};
 
 	return (

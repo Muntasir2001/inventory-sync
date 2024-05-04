@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import 'remixicon/fonts/remixicon.css';
+import { Toaster } from 'react-hot-toast';
 
 import './globals.css';
 
@@ -19,6 +20,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${inter.className} h-screen bg-white`}>
+				<Toaster />
 				{children}
 			</body>
 		</html>

@@ -19,7 +19,10 @@ export async function authenticate(
 						error: 'Invalid credentials.',
 					};
 				default:
-					return 'Something went wrong.';
+					return {
+						type: 'error',
+						error: 'Something went wrong!',
+					};
 			}
 		}
 		throw error;

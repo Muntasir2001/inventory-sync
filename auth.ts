@@ -14,14 +14,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		Credentials({
 			name: 'Credentials',
 			// used when using authjs auth form
-			credentials: {
-				username: {
-					label: 'Email',
-					type: 'email',
-					placeholder: 'jsmith',
-				},
-				password: { label: 'Password', type: 'password' },
-			},
+			// credentials: {
+			// 	username: {
+			// 		label: 'Email',
+			// 		type: 'email',
+			// 		placeholder: 'jsmith',
+			// 	},
+			// 	password: { label: 'Password', type: 'password' },
+			// },
 			// @ts-ignore
 			async authorize(credentials) {
 				const parsedCredentials = z
