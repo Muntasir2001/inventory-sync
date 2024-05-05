@@ -13,9 +13,11 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { authenticate } from '@/lib/actions';
+import { createUser } from '@/prisma/functions/users';
 
 const RegisterTab = () => {
+	const [firstName, setFirstName] = useState<string>('');
+	const [lastName, setLastName] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
@@ -27,10 +29,15 @@ const RegisterTab = () => {
 		setPassword(e.currentTarget.value);
 	};
 
-	const onLoginButtonClick = (
+	const onCreateAccountButtonClick = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
-		authenticate(undefined, email, password);
+		createUser({
+			firstName: 'he',
+			lastName: 'he',
+			email: 'as',
+			password: 'd',
+		});
 	};
 
 	return (
@@ -43,6 +50,28 @@ const RegisterTab = () => {
 					</CardDescription>
 				</CardHeader>
 				<CardContent className='space-y-2'>
+					<div className='space-y-1'>
+						<Label className='text-black' htmlFor='first-name'>
+							First Name
+						</Label>
+						<Input
+							type='text'
+							id='first-name'
+							placeholder='Your first name'
+							className='bg-dark-white text-black border-0'
+						/>
+					</div>
+					<div className='space-y-1'>
+						<Label className='text-black' htmlFor='last-name'>
+							Last Name
+						</Label>
+						<Input
+							type='text'
+							id='last-name'
+							placeholder='Your last name'
+							className='bg-dark-white text-black border-0'
+						/>
+					</div>
 					<div className='space-y-1'>
 						<Label className='text-black' htmlFor='email'>
 							Email
@@ -67,7 +96,10 @@ const RegisterTab = () => {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button className='bg-primary text-black hover:bg-primary hover:brightness-90'>
+					<Button
+						onClick={onCreateAccountButtonClick}
+						className='bg-primary text-black hover:bg-primary hover:brightness-90'
+					>
 						Create Account
 					</Button>
 				</CardFooter>
