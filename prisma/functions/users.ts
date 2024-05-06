@@ -1,8 +1,8 @@
 'use server';
 
-import { randomBytes, scryptSync } from 'crypto';
-
 import { Prisma } from '@prisma/client';
+
+import { hashPassword } from '@/auth.utils';
 import { prisma } from '../prisma';
 
 interface GetUser {
@@ -15,10 +15,6 @@ interface CreateUser {
 	email: string;
 	password: string;
 }
-
-const encryptPassword = (password: string, salt: string) => {
-	return scryptSync(password, salt, 32).toString('hex');
-};
 
 export const getUser = async ({ email }: GetUser) => {
 	try {
@@ -40,8 +36,7 @@ export const createUser = async ({
 	email,
 	password,
 }: CreateUser) => {
-	const salt = randomBytes(16).toString('hex');
-	const hashedPassword = encryptPassword(password, salt) + salt;
+	const hashedPassword = hashPassword(password);
 
 	await prisma.users
 		.create({
@@ -53,7 +48,6 @@ export const createUser = async ({
 			},
 		})
 		.then((u) => {
-			console.log(u);
 			return u;
 		})
 		.catch((e) => {

@@ -1,10 +1,10 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
-// import bcrypt from 'bcrypt';
 
 import { authConfig } from './auth.config';
 import { getUser } from './prisma/functions/users';
+import { matchPassword } from './auth.utils';
 
 export const BASE_PATH = '/api/auth';
 
@@ -36,13 +36,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					const user = await getUser({ email });
 					if (!user) return null;
 
-					const bcrypt = require('bcrypt');
-					const passwordsMatch = await bcrypt.compare(
-						password,
-						user.password,
-					);
-
-					if (passwordsMatch) return user;
+					if (matchPassword(password, user.password)) return user;
 				}
 
 				console.log('Invalid credentials');
