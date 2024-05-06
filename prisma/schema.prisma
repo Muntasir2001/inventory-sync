@@ -21,6 +21,8 @@ model Users {
   email     String
   items     Items[]
   password  String
+
+  @@unique([email])
 }
 
 model Currencies {
