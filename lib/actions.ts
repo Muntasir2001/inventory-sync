@@ -1,13 +1,13 @@
 'use server';
 
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 
-export async function authenticate(
+export const authenticate = async (
 	prevState: string | undefined,
 	email: string,
 	password: string,
-) {
+) => {
 	try {
 		await signIn('credentials', { email, password });
 	} catch (error) {
@@ -27,4 +27,8 @@ export async function authenticate(
 		}
 		throw error;
 	}
-}
+};
+
+export const logOut = async () => {
+	await signOut();
+};
