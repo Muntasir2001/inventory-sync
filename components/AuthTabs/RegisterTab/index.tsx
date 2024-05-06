@@ -21,6 +21,14 @@ const RegisterTab = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
+	const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFirstName(e.currentTarget.value);
+	};
+
+	const onLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setLastName(e.currentTarget.value);
+	};
+
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.currentTarget.value);
 	};
@@ -55,10 +63,14 @@ const RegisterTab = () => {
 							First Name
 						</Label>
 						<Input
+							value={firstName}
+							onChange={onFirstNameChange}
 							type='text'
 							id='first-name'
 							placeholder='Your first name'
-							className='bg-dark-white text-black border-0'
+							className={`bg-dark-white active:bg-dark-white text-black border-0 autofill:shadow-[inset_0_0_0px_1000px_#d8d9d6] ${
+								firstName.length > 0 && 'webkit-text-fill-black'
+							}`}
 						/>
 					</div>
 					<div className='space-y-1'>
@@ -66,10 +78,14 @@ const RegisterTab = () => {
 							Last Name
 						</Label>
 						<Input
+							value={lastName}
+							onChange={onLastNameChange}
 							type='text'
 							id='last-name'
 							placeholder='Your last name'
-							className='bg-dark-white text-black border-0'
+							className={`bg-dark-white active:bg-dark-white text-black border-0 autofill:shadow-[inset_0_0_0px_1000px_#d8d9d6] ${
+								lastName.length > 0 && 'webkit-text-fill-black'
+							}`}
 						/>
 					</div>
 					<div className='space-y-1'>
@@ -77,10 +93,14 @@ const RegisterTab = () => {
 							Email
 						</Label>
 						<Input
+							value={email}
+							onChange={onEmailChange}
 							type='email'
 							id='email'
 							placeholder='Your email'
-							className='bg-dark-white text-black border-0'
+							className={`bg-dark-white autofill:shadow-[inset_0_0_0px_1000px_#d8d9d6] ${
+								email.length > 0 && 'webkit-text-fill-black'
+							} text-black border-0`}
 						/>
 					</div>
 					<div className='space-y-1'>
@@ -88,10 +108,12 @@ const RegisterTab = () => {
 							Password
 						</Label>
 						<Input
+							value={password}
+							onChange={onPasswordChange}
 							id='password'
 							type='password'
 							placeholder='New password'
-							className='bg-dark-white text-black border-0'
+							className='bg-dark-white active:bg-dark-white text-black border-0'
 						/>
 					</div>
 				</CardContent>

@@ -68,7 +68,9 @@ const LoginTab = () => {
 							type='email'
 							id='email'
 							placeholder='Your email'
-							className='bg-dark-white text-black border-0'
+							className={`bg-dark-white active:bg-dark-white text-black border-0 autofill:shadow-[inset_0_0_0px_1000px_#d8d9d6] ${
+								email.length > 0 && 'webkit-text-fill-black'
+							}`}
 							onChange={onEmailChange}
 							value={email}
 						/>
@@ -81,7 +83,7 @@ const LoginTab = () => {
 							id='password'
 							type='password'
 							placeholder='Your password'
-							className='bg-dark-white text-black border-0'
+							className='bg-dark-white active:bg-dark-white text-black border-0'
 							onChange={onPasswordChange}
 							value={password}
 						/>
