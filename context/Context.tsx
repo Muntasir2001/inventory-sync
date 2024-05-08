@@ -5,7 +5,6 @@ import {
 	useContext,
 	useMemo,
 	useReducer,
-	FC,
 	Dispatch,
 } from 'react';
 
