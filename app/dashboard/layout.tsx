@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import 'remixicon/fonts/remixicon.css';
-import { DataWrapper } from '@/context/Context';
 
 import Topbar from '@/components/Topbar';
 import '../globals.css';
+import Providers from '@/redux/Provider';
 
 export const metadata: Metadata = {
 	title: 'Inventory Sync',
@@ -16,11 +16,11 @@ export default function DashboardLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<DataWrapper>
+		<Providers>
 			<div className={`min-h-screen bg-white`}>
 				<Topbar />
 				{children}
 			</div>
-		</DataWrapper>
+		</Providers>
 	);
 }
