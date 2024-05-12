@@ -15,10 +15,10 @@ const usersSlice = createSlice({
 	name: 'sales',
 	initialState,
 	reducers: {
-		addUser: (state, action) => {},
+		setUser: (state, action) => {},
 	},
 });
 
-export const { addUser } = usersSlice.actions;
+export const { setUser } = usersSlice.actions;
 
 export default usersSlice.reducer;
