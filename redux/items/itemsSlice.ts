@@ -9,3 +9,17 @@ interface ItemState {
 const initialState: ItemState = {
 	data: [],
 };
+
+const itemsSlice = createSlice({
+	name: 'items',
+	initialState,
+	reducers: {
+		addItem: (state, action) => {},
+		editItem: (state, action) => {},
+		deleteItem: (state, action) => {},
+	},
+});
+
+export const { addItem, editItem, deleteItem } = itemsSlice.actions;
+
+export default itemsSlice.reducer;
