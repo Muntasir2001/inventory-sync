@@ -14,6 +14,10 @@ interface AddItem {
 	item: Items;
 }
 
+interface DeleteItem {
+	id: number;
+}
+
 export const getAllItems = async () => {
 	let items: Array<Items> = [];
 
@@ -32,14 +36,35 @@ export const getAllItems = async () => {
 };
 
 export const addItem = async ({ item }: AddItem) => {
+	let res: Items | undefined;
+
 	await prisma.items
 		.create({ data: item })
 		.then((d) => {
-			return d;
+			res = d;
 		})
 		.catch((e) => {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
 				throw new Error('Something went wrong');
 			}
 		});
+
+	return res;
+};
+
+export const deleteItem = async ({ id }: DeleteItem) => {
+	let res: Items | undefined;
+
+	await prisma.items
+		.delete({ where: { id } })
+		.then((d) => {
+			res = d;
+		})
+		.catch((e) => {
+			if (e instanceof Prisma.PrismaClientKnownRequestError) {
+				throw new Error('Something went wrong');
+			}
+		});
+
+	return res;
 };

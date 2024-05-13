@@ -4,6 +4,7 @@ import type { Items } from '@prisma/client';
 import {
 	getAllItems as prismGetAllItems,
 	addItem as prismaAddItem,
+	deleteItem as prismaDeleteItem,
 } from '@/prisma/functions/items';
 
 interface ItemState {
@@ -19,7 +20,6 @@ const itemsSlice = createSlice({
 	initialState,
 	reducers: {
 		editItem: (state, action) => {},
-		deleteItem: (state, action) => {},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(addItem.fulfilled, (state, action) => {
@@ -31,26 +31,63 @@ const itemsSlice = createSlice({
 				state.data = action.payload;
 			},
 		);
+		builder.addCase(deleteItem.fulfilled, (state, action) => {});
 	},
 });
 
-export const addItem = createAsyncThunk(
-	'items/addItem',
-	async (item: Items) => {
-		//addItem prisma function
+export const getAllItems = createAsyncThunk(
+	'items/getAllItems',
+	async (arg, { rejectWithValue }) => {
+		let items: Array<Items> = [];
 
-		const res = await prismaAddItem({ item });
+		await prismGetAllItems()
+			.then((d) => {
+				items = d;
+			})
+			.catch((e) => {
+				rejectWithValue(e);
+			});
 
-		console.log(res);
+		return items;
 	},
 );
 
-export const getAllItems = createAsyncThunk('items/getAllItems', async () => {
-	const items = await prismGetAllItems();
+export const addItem = createAsyncThunk(
+	'items/addItem',
+	async (item: Items, { rejectWithValue }) => {
+		let res: Items | undefined;
 
-	return items;
-});
+		await prismaAddItem({ item })
+			.then((d) => {
+				res = d;
+			})
+			.catch((e) => {
+				rejectWithValue(e);
+			});
 
-export const { editItem, deleteItem } = itemsSlice.actions;
+		console.log(res);
+		return res;
+	},
+);
+
+export const deleteItem = createAsyncThunk(
+	'items/deleteItem',
+	async (id: number, { rejectWithValue }) => {
+		let res: Items | undefined;
+
+		await prismaDeleteItem({ id })
+			.then((d) => {
+				res = d;
+			})
+			.catch((e) => {
+				rejectWithValue(e);
+			});
+
+		console.log(res);
+		return res;
+	},
+);
+
+export const {} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
