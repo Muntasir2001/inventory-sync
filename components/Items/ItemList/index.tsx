@@ -1,3 +1,9 @@
+'use client';
+
+import { useEffect } from 'react';
+
+import { AppDispatch, RootState } from '@/redux/store';
+import { getAllItems } from '@/redux/items/itemsSlice';
 import { Input } from '@/components/ui/input';
 import {
 	Select,
@@ -8,9 +14,21 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import Item from '../Item';
-import items from '@/data/items';
+import { Status } from '@/data/items';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Items } from '@prisma/client';
 
 const ItemList = () => {
+	const dispatch = useDispatch<AppDispatch>();
+	const items: Array<Items> | undefined = useSelector(
+		(state: RootState) => state.items.data,
+	);
+
+	useEffect(() => {
+		dispatch(getAllItems());
+	}, []);
+
 	return (
 		<>
 			<div className='flex flex-col gap-12 mt-6'>
@@ -35,18 +53,26 @@ const ItemList = () => {
 					</Select>
 				</div>
 				<div className='flex flex-col gap-6 overflow-y-auto'>
-					{items.map((s, i) => (
-						<Item
-							id={s.id}
-							name={s.name}
-							code={s.code}
-							status={s.status}
-							description={s.description}
-							price={`£${s.price}`}
-							quantity={s.quantity}
-							key={i}
-						/>
-					))}
+					{items && items.length > 0 ? (
+						items.map((s, i) => (
+							<Item
+								id={s.id}
+								name={s.name}
+								code={s.code}
+								status={
+									s.quantity > 0
+										? Status.IN_STOCK
+										: Status.OUT_OF_STOCK
+								} // ** TEMPORARY
+								description={s.description}
+								price={`£${s.price}`}
+								quantity={s.quantity}
+								key={i}
+							/>
+						))
+					) : (
+						<p className='font-bold text-xl text-gray'>No items found</p>
+					)}
 				</div>
 			</div>
 		</>
