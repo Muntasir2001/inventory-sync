@@ -12,7 +12,7 @@ interface ItemState {
 }
 
 const initialState: ItemState = {
-	// data: getAllItems(),
+	data: [],
 };
 
 const itemsSlice = createSlice({
@@ -25,13 +25,19 @@ const itemsSlice = createSlice({
 		builder.addCase(addItem.fulfilled, (state, action) => {
 			// state.data = [action.payload]
 		});
+
 		builder.addCase(
 			getAllItems.fulfilled,
 			(state, action: PayloadAction<Array<Items>>) => {
 				state.data = action.payload;
 			},
 		);
-		builder.addCase(deleteItem.fulfilled, (state, action) => {});
+		builder.addCase(
+			deleteItem.fulfilled,
+			(state, action: PayloadAction<Items | undefined>) => {
+				state.data = state.data?.filter((d) => d.id !== action.payload?.id);
+			},
+		);
 	},
 });
 
@@ -65,7 +71,6 @@ export const addItem = createAsyncThunk(
 				rejectWithValue(e);
 			});
 
-		console.log(res);
 		return res;
 	},
 );
@@ -83,7 +88,6 @@ export const deleteItem = createAsyncThunk(
 				rejectWithValue(e);
 			});
 
-		console.log(res);
 		return res;
 	},
 );

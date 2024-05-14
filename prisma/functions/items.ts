@@ -44,6 +44,8 @@ export const addItem = async ({ item }: AddItem) => {
 			res = d;
 		})
 		.catch((e) => {
+			console.log('addItemError', e);
+
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
 				throw new Error('Something went wrong');
 			}
@@ -61,6 +63,8 @@ export const deleteItem = async ({ id }: DeleteItem) => {
 			res = d;
 		})
 		.catch((e) => {
+			console.log('deleteItemError', e);
+
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
 				throw new Error('Something went wrong');
 			}

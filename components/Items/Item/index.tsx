@@ -89,7 +89,7 @@ const Item = ({
 								</AlertDialogTrigger>
 							</DropdownMenuContent>
 						</DropdownMenu>
-						<ItemDeleteAlertDialog />
+						<ItemDeleteAlertDialog itemId={id} />
 					</AlertDialog>
 				</div>
 			</Dialog>
