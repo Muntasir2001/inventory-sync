@@ -38,7 +38,7 @@ const LoginTab = () => {
 			},
 		});
 
-		const res = await authenticate(undefined, email, password);
+		const res = await authenticate(email, password);
 
 		if (res?.type === 'error') {
 			toast.error(res.error, {

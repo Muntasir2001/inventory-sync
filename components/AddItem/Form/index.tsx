@@ -3,7 +3,9 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
+import { AppDispatch } from '@/redux/store';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -17,6 +19,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 const AddItemForm = () => {
+	const dispatch = useDispatch<AppDispatch>();
+
 	const formSchema = z.object({
 		name: z.string().max(50),
 		code: z.string(),
@@ -59,7 +63,7 @@ const AddItemForm = () => {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className='border-black text-black autofill:shadow-[inset_0_0_0px_1000px_#f1f2ee] autofill:text-black'
+										className='border-black text-black'
 										placeholder='Name of the item'
 										{...field}
 										required

@@ -12,10 +12,15 @@ interface GetItemById {
 
 interface AddItem {
 	item: Items;
+	userId?: number;
 }
 
 interface DeleteItem {
 	id: number;
+}
+
+interface EditItem {
+	item: Items;
 }
 
 export const getAllItems = async () => {
@@ -59,6 +64,30 @@ export const deleteItem = async ({ id }: DeleteItem) => {
 
 	await prisma.items
 		.delete({ where: { id } })
+		.then((d) => {
+			res = d;
+		})
+		.catch((e) => {
+			console.log('deleteItemError', e);
+
+			if (e instanceof Prisma.PrismaClientKnownRequestError) {
+				throw new Error('Something went wrong');
+			}
+		});
+
+	return res;
+};
+
+export const editItem = async ({ item }: EditItem) => {
+	let res: Items | undefined;
+
+	await prisma.items
+		.update({
+			where: {
+				id: item.id,
+			},
+			data: item,
+		})
 		.then((d) => {
 			res = d;
 		})

@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 
 import { authConfig } from './auth.config';
-import { getUser } from './prisma/functions/users';
+import { getUserByEmail } from './prisma/functions/users';
 import { matchPassword } from './auth.utils';
 
 export const BASE_PATH = '/api/auth';
@@ -33,10 +33,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
 				if (parsedCredentials.success) {
 					const { email, password } = parsedCredentials.data;
-					const user = await getUser({ email });
+					const user = await getUserByEmail({ email });
 					if (!user) return null;
 
-					if (matchPassword(password, user.password)) return user;
+					if (matchPassword(password, user.password)) {
+						return user;
+					}
 				}
 
 				console.log('Invalid credentials');

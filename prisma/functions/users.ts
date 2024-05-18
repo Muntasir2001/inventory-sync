@@ -5,7 +5,7 @@ import { Prisma } from '@prisma/client';
 import { hashPassword } from '@/auth.utils';
 import { prisma } from '../prisma';
 
-interface GetUser {
+interface GetUserByEmail {
 	email: string;
 }
 
@@ -16,7 +16,7 @@ interface CreateUser {
 	password: string;
 }
 
-export const getUser = async ({ email }: GetUser) => {
+export const getUserByEmail = async ({ email }: GetUserByEmail) => {
 	try {
 		const user = await prisma.users.findFirst({ where: { email: email } });
 

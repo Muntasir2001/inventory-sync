@@ -3,11 +3,7 @@
 import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 
-export const authenticate = async (
-	prevState: string | undefined,
-	email: string,
-	password: string,
-) => {
+export const authenticate = async (email: string, password: string) => {
 	try {
 		await signIn('credentials', { email, password });
 	} catch (error) {

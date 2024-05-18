@@ -5,6 +5,7 @@ import {
 	getAllItems as prismGetAllItems,
 	addItem as prismaAddItem,
 	deleteItem as prismaDeleteItem,
+	editItem as prismaEditItem,
 } from '@/prisma/functions/items';
 
 interface ItemState {
@@ -18,12 +19,10 @@ const initialState: ItemState = {
 const itemsSlice = createSlice({
 	name: 'items',
 	initialState,
-	reducers: {
-		editItem: (state, action) => {},
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(addItem.fulfilled, (state, action) => {
-			// state.data = [action.payload]
+			if (action.payload) state.data?.push(action.payload);
 		});
 
 		builder.addCase(
@@ -32,6 +31,7 @@ const itemsSlice = createSlice({
 				state.data = action.payload;
 			},
 		);
+
 		builder.addCase(
 			deleteItem.fulfilled,
 			(state, action: PayloadAction<Items | undefined>) => {
@@ -81,6 +81,23 @@ export const deleteItem = createAsyncThunk(
 		let res: Items | undefined;
 
 		await prismaDeleteItem({ id })
+			.then((d) => {
+				res = d;
+			})
+			.catch((e) => {
+				rejectWithValue(e);
+			});
+
+		return res;
+	},
+);
+
+export const editItem = createAsyncThunk(
+	'items/addItem',
+	async (item: Items, { rejectWithValue }) => {
+		let res: Items | undefined;
+
+		await prismaEditItem({ item })
 			.then((d) => {
 				res = d;
 			})
