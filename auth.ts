@@ -22,7 +22,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			// 	},
 			// 	password: { label: 'Password', type: 'password' },
 			// },
-			// @ts-ignore
+			// @ts-expect-error i dont have time
 			async authorize(credentials) {
 				const parsedCredentials = z
 					.object({

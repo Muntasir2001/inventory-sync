@@ -1,8 +1,6 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { Users } from '@prisma/client';
-
-interface UserState {
+export interface UserState {
 	data?: {
 		id: number;
 		firstName: string;
@@ -26,9 +24,9 @@ const usersSlice = createSlice({
 				email: string;
 			}>,
 		) => {
-			console.log('setting user', action.payload);
-
 			state.data = action.payload;
+
+			console.log(action.payload);
 		},
 	},
 });

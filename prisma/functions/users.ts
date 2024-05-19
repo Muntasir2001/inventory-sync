@@ -18,13 +18,12 @@ interface CreateUser {
 
 export const getUserByEmail = async ({ email }: GetUserByEmail) => {
 	try {
-		const user = await prisma.users.findFirst({ where: { email: email } });
+		const user = await prisma.users.findFirst({ where: { email } });
 
 		if (user) {
 			return user;
-		} else {
-			return false;
 		}
+		return false;
 	} catch (err) {
 		throw new Error('Failed to fetch user.');
 	}
@@ -32,13 +31,12 @@ export const getUserByEmail = async ({ email }: GetUserByEmail) => {
 
 export const getUserInfoByEmail = async ({ email }: GetUserByEmail) => {
 	try {
-		const user = await prisma.users.findFirst({ where: { email: email } });
+		const user = await prisma.users.findFirst({ where: { email } });
 
 		if (user) {
 			return user;
-		} else {
-			return false;
 		}
+		return false;
 	} catch (err) {
 		throw new Error('Failed to fetch user.');
 	}
@@ -47,15 +45,14 @@ export const getUserInfoByEmail = async ({ email }: GetUserByEmail) => {
 export const getFilteredUserInfoByEmail = async ({ email }: GetUserByEmail) => {
 	try {
 		const user = await prisma.users.findFirst({
-			where: { email: email },
+			where: { email },
 			select: { id: true, email: true, firstName: true, lastName: true },
 		});
 
 		if (user) {
 			return user;
-		} else {
-			return false;
 		}
+		return false;
 	} catch (err) {
 		throw new Error('Failed to fetch user.');
 	}

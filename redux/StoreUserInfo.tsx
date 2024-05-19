@@ -30,6 +30,7 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		storeUser();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	return <>{children}</>;

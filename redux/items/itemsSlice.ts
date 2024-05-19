@@ -1,5 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Items } from '@prisma/client';
 
 import {
 	getAllItems as prismGetAllItems,
@@ -7,9 +6,11 @@ import {
 	deleteItem as prismaDeleteItem,
 	editItem as prismaEditItem,
 } from '@/prisma/functions/items';
+import type { Items } from '@prisma/client';
+import { UserState } from '../user/userSlice';
 
 interface ItemState {
-	data?: Array<Items>;
+	data: Array<Items>;
 }
 
 const initialState: ItemState = {
@@ -43,11 +44,18 @@ const itemsSlice = createSlice({
 
 export const getAllItems = createAsyncThunk(
 	'items/getAllItems',
-	async (arg, { rejectWithValue }) => {
+	async (args, { rejectWithValue, getState }) => {
+		const { user: userStore } = getState() as {
+			user: UserState;
+		};
+
 		let items: Array<Items> = [];
 
-		await prismGetAllItems()
+		console.log(userStore);
+
+		await prismGetAllItems({ userId: userStore.data!.id })
 			.then((d) => {
+				console.log(d);
 				items = d;
 			})
 			.catch((e) => {

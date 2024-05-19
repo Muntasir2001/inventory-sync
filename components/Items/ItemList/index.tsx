@@ -1,9 +1,9 @@
 'use client';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { AppDispatch, RootState } from '@/redux/store';
-import { getAllItems } from '@/redux/items/itemsSlice';
+import { useSelector } from 'react-redux';
+
 import { Input } from '@/components/ui/input';
 import {
 	Select,
@@ -13,16 +13,24 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import Item from '../Item';
 import { Status } from '@/data/items';
+import { getAllItems } from '@/redux/items/itemsSlice';
+import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
+import { selectUser } from '@/redux/user/selectors';
 import { Items } from '@prisma/client';
+import Item from '../Item';
 
 const ItemList = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
 	const items: Array<Items> | undefined = useSelector(
 		(state: RootState) => state.items.data,
 	);
-	const users = useSelector((state: RootState) => state.user.data);
+	const users = useAppSelector(selectUser);
+
+	useEffect(() => {
+		dispatch(getAllItems());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>

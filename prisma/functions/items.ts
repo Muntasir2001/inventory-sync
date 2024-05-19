@@ -6,28 +6,30 @@ import type { Items } from '@prisma/client';
 import { prisma } from '../prisma';
 import AddItem from '@/app/dashboard/add-item/page';
 
-interface GetItemById {
-	id: number;
-}
-
 interface AddItem {
 	item: Items;
-	userId?: number;
+	userId: number;
 }
 
 interface DeleteItem {
 	id: number;
+	userId: number;
 }
 
 interface EditItem {
 	item: Items;
+	userId: number;
 }
 
-export const getAllItems = async () => {
+interface GetAllItems {
+	userId: number;
+}
+
+export const getAllItems = async ({ userId }: GetAllItems) => {
 	let items: Array<Items> = [];
 
 	await prisma.items
-		.findMany()
+		.findMany({ where: { userId } })
 		.then((d) => {
 			items = d;
 		})
