@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AppDispatch, RootState } from '@/redux/store';
 import { getAllItems } from '@/redux/items/itemsSlice';
@@ -23,12 +21,8 @@ const ItemList = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const items: Array<Items> | undefined = useSelector(
 		(state: RootState) => state.items.data,
-		shallowEqual,
 	);
-
-	useEffect(() => {
-		dispatch(getAllItems());
-	}, []);
+	const users = useSelector((state: RootState) => state.user.data);
 
 	return (
 		<>

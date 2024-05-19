@@ -30,6 +30,37 @@ export const getUserByEmail = async ({ email }: GetUserByEmail) => {
 	}
 };
 
+export const getUserInfoByEmail = async ({ email }: GetUserByEmail) => {
+	try {
+		const user = await prisma.users.findFirst({ where: { email: email } });
+
+		if (user) {
+			return user;
+		} else {
+			return false;
+		}
+	} catch (err) {
+		throw new Error('Failed to fetch user.');
+	}
+};
+
+export const getFilteredUserInfoByEmail = async ({ email }: GetUserByEmail) => {
+	try {
+		const user = await prisma.users.findFirst({
+			where: { email: email },
+			select: { id: true, email: true, firstName: true, lastName: true },
+		});
+
+		if (user) {
+			return user;
+		} else {
+			return false;
+		}
+	} catch (err) {
+		throw new Error('Failed to fetch user.');
+	}
+};
+
 export const createUser = async ({
 	firstName,
 	lastName,

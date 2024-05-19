@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
 
 import { AppDispatch, RootState } from '@/redux/store';
-import { getUserByEmail } from '@/prisma/functions/users';
+import { getFilteredUserInfoByEmail } from '@/prisma/functions/users';
 import { setUser } from './user/userSlice';
 
 const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
@@ -12,26 +12,25 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	const user = useSelector((state: RootState) => state.user.data);
 	const { data: session, status } = useSession();
 
-	useEffect(() => {
-		const storeUser = async () => {
-			if (status === 'authenticated') {
-				if (!user) {
-					if (session?.user?.name) {
-						const user = await getUserByEmail({
-							email: session.user.name,
-						});
+	const storeUser = async () => {
+		if (user || !session || !session.user || !session.user.email) {
+			return;
+		}
 
-						if (user) {
-							user.password = ''; // ** TEMP
-							dispatch(setUser(user));
-						}
-					}
-				}
+		if (status === 'authenticated') {
+			const userPrisma = await getFilteredUserInfoByEmail({
+				email: session.user.email,
+			});
+
+			if (userPrisma) {
+				dispatch(setUser(userPrisma));
 			}
-		};
+		}
+	};
 
+	useEffect(() => {
 		storeUser();
-	}, []);
+	}, [status]);
 
 	return <>{children}</>;
 };
