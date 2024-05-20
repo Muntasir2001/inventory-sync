@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
 
 import { Input } from '@/components/ui/input';
@@ -16,18 +15,16 @@ import {
 } from '@/components/ui/select';
 import { Status } from '@/data/items';
 import { getAllItems } from '@/redux/items/itemsSlice';
-import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectUser } from '@/redux/user/selectors';
-import { Items } from '@prisma/client';
 import Item from '../Item';
+import { selectItems } from '@/redux/items/selectors';
 
 const ItemList = () => {
 	const [loading, setLoading] = useState<boolean>(true);
 
 	const dispatch = useAppDispatch();
-	const items: Array<Items> | undefined = useSelector(
-		(state: RootState) => state.items.data,
-	);
+	const items = useAppSelector(selectItems);
 	const users = useAppSelector(selectUser);
 	const { status: authStatus } = useSession();
 
