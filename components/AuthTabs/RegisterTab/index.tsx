@@ -66,10 +66,10 @@ const RegisterTab = () => {
 
 		try {
 			await createUser({
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				password: password,
+				firstName,
+				lastName,
+				email,
+				password,
 			});
 
 			toast.success('Account created successfully! Please sign in now.', {

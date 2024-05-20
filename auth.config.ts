@@ -17,6 +17,19 @@ export const authConfig = {
 			}
 			return true;
 		},
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		session({ session, token, user }) {
+			// `session.user.id` is now a valid property, and will be type-checked
+			// in places like `useSession().data.user` or `auth().user`
+
+			return {
+				...session,
+				user: {
+					...session.user,
+					id: token.sub,
+				},
+			};
+		},
 	},
 	providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;

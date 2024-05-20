@@ -7,7 +7,6 @@ import { prisma } from '../prisma';
 
 interface AddItem {
 	item: Items;
-	userId: number;
 }
 
 interface DeleteItem {

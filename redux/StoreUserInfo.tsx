@@ -18,6 +18,8 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 		}
 
 		if (status === 'authenticated') {
+			console.log('session', session);
+
 			const userPrisma = await getFilteredUserInfoByEmail({
 				email: session.user.email,
 			});
