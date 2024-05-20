@@ -51,8 +51,6 @@ export const getAllItems = createAsyncThunk(
 
 		let items: Array<Items> = [];
 
-		console.log(userStore);
-
 		await prismGetAllItems({ userId: userStore.data!.id })
 			.then((d) => {
 				console.log(d);

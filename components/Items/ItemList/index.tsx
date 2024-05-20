@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
+import { useSession } from 'next-auth/react';
 
 import { Input } from '@/components/ui/input';
 import {
@@ -21,16 +22,24 @@ import { Items } from '@prisma/client';
 import Item from '../Item';
 
 const ItemList = () => {
+	const [loading, setLoading] = useState<boolean>(true);
+
 	const dispatch = useAppDispatch();
 	const items: Array<Items> | undefined = useSelector(
 		(state: RootState) => state.items.data,
 	);
 	const users = useAppSelector(selectUser);
+	const { status: authStatus } = useSession();
 
 	useEffect(() => {
-		dispatch(getAllItems());
+		if (authStatus === 'authenticated' && users) {
+			dispatch(getAllItems());
+
+			if (items.length > 0) setLoading(false);
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [authStatus, users, items.length]);
 
 	return (
 		<>
@@ -56,26 +65,34 @@ const ItemList = () => {
 					</Select>
 				</div>
 				<div className='flex flex-col gap-6 overflow-y-auto'>
-					{items && items.length > 0 ? (
-						items.map((s, i) => (
-							<Item
-								id={s.id}
-								name={s.name}
-								code={s.code}
-								status={
-									s.quantity > 0
-										? Status.IN_STOCK
-										: Status.OUT_OF_STOCK
-								} // ** TEMPORARY
-								description={s.description}
-								price={`£${s.price}`}
-								quantity={s.quantity}
-								key={i}
-							/>
-						))
-					) : (
-						<p className='font-bold text-xl text-gray'>No items found</p>
+					{loading && (
+						<p className='font-bold text-xl text-gray'>
+							Loading items...
+						</p>
 					)}
+
+					{!loading && items && items.length > 0
+						? items.map((s, i) => (
+								<Item
+									id={s.id}
+									name={s.name}
+									code={s.code}
+									status={
+										s.quantity > 0
+											? Status.IN_STOCK
+											: Status.OUT_OF_STOCK
+									} // ** TEMPORARY
+									description={s.description}
+									price={`£${s.price}`}
+									quantity={s.quantity}
+									key={i}
+								/>
+						  ))
+						: !loading && (
+								<p className='font-bold text-xl text-gray'>
+									No items found
+								</p>
+						  )}
 				</div>
 			</div>
 		</>
