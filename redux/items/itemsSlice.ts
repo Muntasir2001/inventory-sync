@@ -69,6 +69,8 @@ export const addItem = createAsyncThunk(
 	async (item: Items, { rejectWithValue }) => {
 		let res: Items | undefined;
 
+		// res?.userId = 8
+
 		await prismaAddItem({ item })
 			.then((d) => {
 				res = d;

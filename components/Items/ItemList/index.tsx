@@ -15,10 +15,10 @@ import {
 } from '@/components/ui/select';
 import { Status } from '@/data/items';
 import { getAllItems } from '@/redux/items/itemsSlice';
+import { selectItems } from '@/redux/items/selectors';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectUser } from '@/redux/user/selectors';
 import Item from '../Item';
-import { selectItems } from '@/redux/items/selectors';
 
 const ItemList = () => {
 	const [loading, setLoading] = useState<boolean>(true);

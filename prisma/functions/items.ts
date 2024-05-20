@@ -4,7 +4,6 @@ import { Prisma } from '@prisma/client';
 import type { Items } from '@prisma/client';
 
 import { prisma } from '../prisma';
-import AddItem from '@/app/dashboard/add-item/page';
 
 interface AddItem {
 	item: Items;
