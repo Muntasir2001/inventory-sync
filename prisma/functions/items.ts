@@ -11,12 +11,10 @@ interface AddItem {
 
 interface DeleteItem {
 	id: number;
-	userId: number;
 }
 
 interface EditItem {
 	item: Items;
-	userId: number;
 }
 
 interface GetAllItems {

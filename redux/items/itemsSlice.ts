@@ -7,7 +7,6 @@ import {
 	editItem as prismaEditItem,
 } from '@/prisma/functions/items';
 import type { Items } from '@prisma/client';
-import { UserState } from '../user/userSlice';
 
 interface ItemState {
 	data: Array<Items>;
@@ -44,16 +43,11 @@ const itemsSlice = createSlice({
 
 export const getAllItems = createAsyncThunk(
 	'items/getAllItems',
-	async (args, { rejectWithValue, getState }) => {
-		const { user: userStore } = getState() as {
-			user: UserState;
-		};
-
+	async (userId: number, { rejectWithValue }) => {
 		let items: Array<Items> = [];
 
-		await prismGetAllItems({ userId: userStore.data!.id })
+		await prismGetAllItems({ userId })
 			.then((d) => {
-				console.log(d);
 				items = d;
 			})
 			.catch((e) => {
@@ -83,10 +77,10 @@ export const addItem = createAsyncThunk(
 
 export const deleteItem = createAsyncThunk(
 	'items/deleteItem',
-	async (id: number, { rejectWithValue }) => {
+	async (itemId: number, { rejectWithValue }) => {
 		let res: Items | undefined;
 
-		await prismaDeleteItem({ id })
+		await prismaDeleteItem({ id: itemId })
 			.then((d) => {
 				res = d;
 			})
@@ -115,6 +109,6 @@ export const editItem = createAsyncThunk(
 	},
 );
 
-export const {} = itemsSlice.actions;
+// export const {} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

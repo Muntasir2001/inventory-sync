@@ -18,7 +18,7 @@ export const authConfig = {
 			return true;
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		session({ session, token, user }) {
+		session({ session, token }) {
 			// `session.user.id` is now a valid property, and will be type-checked
 			// in places like `useSession().data.user` or `auth().user`
 

@@ -26,13 +26,13 @@ const ItemList = () => {
 	const dispatch = useAppDispatch();
 	const items = useAppSelector(selectItems);
 	const users = useAppSelector(selectUser);
-	const { status: authStatus } = useSession();
+	const { data: session, status: authStatus } = useSession();
 
 	useEffect(() => {
 		if (authStatus === 'authenticated' && users) {
-			dispatch(getAllItems());
+			dispatch(getAllItems(parseInt(session.user.id)));
 
-			if (items.length > 0) setLoading(false);
+			if (items != undefined) setLoading(false);
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

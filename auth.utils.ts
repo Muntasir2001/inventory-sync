@@ -23,7 +23,7 @@ export const hashPassword = (password: string): string => {
 /**
  * Match password against the stored hash
  */
-export const matchPassword = (password: string, hash: string): Boolean => {
+export const matchPassword = (password: string, hash: string): boolean => {
 	// extract salt from the hashed string
 	// our hex password length is 32*2 = 64
 	const salt = hash.slice(64);
