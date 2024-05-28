@@ -17,7 +17,7 @@ interface Props {
 	name: string;
 	code: string;
 	status: Status;
-	description: string;
+	description?: string;
 	price: string;
 	quantity: number;
 }

@@ -1,11 +1,13 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
-import { AppDispatch } from '@/redux/store';
+import { useAppDispatch } from '@/redux/store';
+import { addItem } from '@/redux/items/itemsSlice';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -19,7 +21,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 const AddItemForm = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
+	const { data: session } = useSession();
 
 	const formSchema = z.object({
 		name: z.string().max(50),
@@ -40,11 +43,40 @@ const AddItemForm = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
+
 		console.log(values);
-	}
+
+		const toastId = toast.loading('Adding item...', {
+			style: {
+				textAlign: 'center',
+			},
+		});
+
+		const res = await dispatch(
+			addItem({
+				...values,
+				userId: parseInt(session!.user.id),
+				currencyId: 1,
+			}),
+		);
+
+		console.log('res', res);
+
+		if (res) {
+			toast.success('Item added successfully!', {
+				id: toastId,
+				duration: 5000,
+			});
+		} else {
+			toast.error('Something went wrong!', {
+				id: toastId,
+				duration: 10000,
+			});
+		}
+	};
 
 	return (
 		<>

@@ -37,7 +37,7 @@ model Items {
   id          Int        @id @default(sequence())
   code        String
   name        String
-  description String
+  description String?
   quantity    Int
   price       Int // price for each
   currencyId  Int

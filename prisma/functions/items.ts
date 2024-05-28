@@ -6,7 +6,15 @@ import type { Items } from '@prisma/client';
 import { prisma } from '../prisma';
 
 interface AddItem {
-	item: Items;
+	item: {
+		code: string;
+		name: string;
+		description?: string;
+		quantity: number;
+		price: number;
+		currencyId: number;
+		userId: number;
+	};
 }
 
 interface DeleteItem {
@@ -40,6 +48,8 @@ export const getAllItems = async ({ userId }: GetAllItems) => {
 
 export const addItem = async ({ item }: AddItem) => {
 	let res: Items | undefined;
+
+	console.log('adding item');
 
 	await prisma.items
 		.create({ data: item })
