@@ -79,7 +79,7 @@ const ItemList = () => {
 											? Status.IN_STOCK
 											: Status.OUT_OF_STOCK
 									} // ** TEMPORARY
-									description={s.description}
+									description={s.description || 'No description'}
 									price={`£${s.price}`}
 									quantity={s.quantity}
 									key={i}

@@ -63,9 +63,7 @@ const AddItemForm = () => {
 			}),
 		);
 
-		console.log('res', res);
-
-		if (res) {
+		if (res.type.includes('success') || res.type.includes('fulfilled')) {
 			toast.success('Item added successfully!', {
 				id: toastId,
 				duration: 5000,
@@ -119,7 +117,7 @@ const AddItemForm = () => {
 										className='border-black text-black'
 										placeholder='Item code'
 										{...field}
-										type='number'
+										type='text'
 										required
 									/>
 								</FormControl>

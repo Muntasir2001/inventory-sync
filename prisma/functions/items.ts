@@ -59,9 +59,9 @@ export const addItem = async ({ item }: AddItem) => {
 		.catch((e) => {
 			console.log('addItemError', e);
 
-			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				throw new Error('Something went wrong');
-			}
+			throw new Error('Something went wrong');
+			// if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			// }
 		});
 
 	return res;

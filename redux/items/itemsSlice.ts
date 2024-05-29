@@ -60,18 +60,15 @@ export const getAllItems = createAsyncThunk(
 
 export const addItem = createAsyncThunk(
 	'items/addItem',
-	async (
-		item: {
-			code: string;
-			name: string;
-			description?: string;
-			quantity: number;
-			price: number;
-			currencyId: number;
-			userId: number;
-		},
-		{ rejectWithValue },
-	) => {
+	async (item: {
+		code: string;
+		name: string;
+		description?: string;
+		quantity: number;
+		price: number;
+		currencyId: number;
+		userId: number;
+	}) => {
 		let res: Items | undefined;
 
 		await prismaAddItem({ item })
@@ -79,7 +76,7 @@ export const addItem = createAsyncThunk(
 				res = d;
 			})
 			.catch((e) => {
-				rejectWithValue(e);
+				throw e;
 			});
 
 		return res;
