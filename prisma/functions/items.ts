@@ -1,6 +1,5 @@
 'use server';
 
-import { Prisma } from '@prisma/client';
 import type { Items } from '@prisma/client';
 
 import { prisma } from '../prisma';
@@ -38,9 +37,9 @@ export const getAllItems = async ({ userId }: GetAllItems) => {
 			items = d;
 		})
 		.catch((e) => {
-			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				throw new Error('Something went wrong');
-			}
+			console.log('getAllItemsError', e);
+
+			throw new Error('Something went wrong');
 		});
 
 	return items;
@@ -60,8 +59,6 @@ export const addItem = async ({ item }: AddItem) => {
 			console.log('addItemError', e);
 
 			throw new Error('Something went wrong');
-			// if (e instanceof Prisma.PrismaClientKnownRequestError) {
-			// }
 		});
 
 	return res;
@@ -78,9 +75,7 @@ export const deleteItem = async ({ id }: DeleteItem) => {
 		.catch((e) => {
 			console.log('deleteItemError', e);
 
-			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				throw new Error('Something went wrong');
-			}
+			throw new Error('Something went wrong');
 		});
 
 	return res;
@@ -100,11 +95,9 @@ export const editItem = async ({ item }: EditItem) => {
 			res = d;
 		})
 		.catch((e) => {
-			console.log('deleteItemError', e);
+			console.log('editItemError', e);
 
-			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				throw new Error('Something went wrong');
-			}
+			throw new Error('Something went wrong');
 		});
 
 	return res;

@@ -44,11 +44,6 @@ const AddItemForm = () => {
 	});
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-
-		console.log(values);
-
 		const toastId = toast.loading('Adding item...', {
 			style: {
 				textAlign: 'center',
