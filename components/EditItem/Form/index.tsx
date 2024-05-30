@@ -2,9 +2,11 @@
 
 import { useParams } from 'next/navigation';
 
+import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -17,10 +19,16 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import items from '@/data/items';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
+import { selectItems } from '@/redux/items/selectors';
+import { editItem } from '@/redux/items/itemsSlice';
 
 const EditItemForm = () => {
 	const params = useParams<{ itemId: string }>();
+
+	const { data: session } = useSession();
+	const dispatch = useAppDispatch();
+	const items = useAppSelector(selectItems);
 
 	const filteredItem = items.filter((i) => i.id === parseInt(params.itemId));
 
@@ -40,15 +48,40 @@ const EditItemForm = () => {
 			quantity: filteredItem.length > 0 ? filteredItem[0].quantity : 0,
 			price: filteredItem.length > 0 ? filteredItem[0].price : 0,
 			description:
-				filteredItem.length > 0 ? filteredItem[0].description : '',
+				filteredItem.length > 0 &&
+				filteredItem[0].description &&
+				filteredItem[0].description?.length > 0
+					? filteredItem[0].description
+					: '',
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		console.log(values);
-	}
+
+		const toastId = toast.loading('Processing...', {
+			style: {
+				textAlign: 'center',
+			},
+		});
+
+		/* temp: solution to optional description field which is causing issues  */
+		if (!values.description) {
+			values.description = ' ';
+		} else if (values.description.length <= 0) {
+			values.description = ' ';
+		}
+
+		const res = await dispatch(
+			editItem({
+				...values,
+				userId: parseInt(session!.user.id),
+				currencyId: 1,
+				id: parseInt(params.itemId),
+				description: ' sd',
+			}),
+		);
+	};
 
 	return (
 		<>

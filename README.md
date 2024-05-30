@@ -11,8 +11,8 @@
       -  Price for each
       -  Pictures (maybe)
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [x] Frontend State management
+   -  [x] Backend
 1. Currency
    -  _Configurable in settings_
    -  id (primary - default field)
@@ -20,12 +20,12 @@
    -  name
 1. View item
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [x] Frontend State management
+   -  [x] Backend
 1. View items
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [x] Frontend State management
+   -  [x] Backend
 1. Manage items
    -  Edit (all the fields)
       -  [x] UI
@@ -33,8 +33,8 @@
       -  [ ] Backend
    -  Delete
       -  [x] UI
-      -  [ ] Frontend State management
-      -  [ ] Backend
+      -  [x] Frontend State management
+      -  [x] Backend
    -  Update quantity when there is a sale (this would done through **Make Sale** page)
       -  [ ] Frontend State management
       -  [ ] Backend

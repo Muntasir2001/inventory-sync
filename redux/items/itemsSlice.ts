@@ -43,7 +43,7 @@ const itemsSlice = createSlice({
 
 export const getAllItems = createAsyncThunk(
 	'items/getAllItems',
-	async (userId: number, { rejectWithValue }) => {
+	async (userId: number) => {
 		let items: Array<Items> = [];
 
 		await prismGetAllItems({ userId })
@@ -51,7 +51,7 @@ export const getAllItems = createAsyncThunk(
 				items = d;
 			})
 			.catch((e) => {
-				rejectWithValue(e);
+				throw e;
 			});
 
 		return items;
@@ -85,7 +85,7 @@ export const addItem = createAsyncThunk(
 
 export const deleteItem = createAsyncThunk(
 	'items/deleteItem',
-	async (itemId: number, { rejectWithValue }) => {
+	async (itemId: number) => {
 		let res: Items | undefined;
 
 		await prismaDeleteItem({ id: itemId })
@@ -93,7 +93,7 @@ export const deleteItem = createAsyncThunk(
 				res = d;
 			})
 			.catch((e) => {
-				rejectWithValue(e);
+				throw e;
 			});
 
 		return res;
@@ -102,7 +102,7 @@ export const deleteItem = createAsyncThunk(
 
 export const editItem = createAsyncThunk(
 	'items/addItem',
-	async (item: Items, { rejectWithValue }) => {
+	async (item: Items) => {
 		let res: Items | undefined;
 
 		await prismaEditItem({ item })
@@ -110,7 +110,7 @@ export const editItem = createAsyncThunk(
 				res = d;
 			})
 			.catch((e) => {
-				rejectWithValue(e);
+				throw e;
 			});
 
 		return res;
