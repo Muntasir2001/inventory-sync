@@ -25,6 +25,16 @@ const itemsSlice = createSlice({
 			if (action.payload) state.data?.push(action.payload);
 		});
 
+		builder.addCase(editItem.fulfilled, (state, action) => {
+			if (action.payload) {
+				const index = state.data.findIndex(
+					(d) => d.id === action.payload?.id,
+				);
+
+				state.data[index] = action.payload;
+			}
+		});
+
 		builder.addCase(
 			getAllItems.fulfilled,
 			(state, action: PayloadAction<Array<Items>>) => {
@@ -101,7 +111,7 @@ export const deleteItem = createAsyncThunk(
 );
 
 export const editItem = createAsyncThunk(
-	'items/addItem',
+	'items/editItem',
 	async (item: Items) => {
 		let res: Items | undefined;
 

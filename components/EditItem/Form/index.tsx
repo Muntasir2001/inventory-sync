@@ -65,22 +65,27 @@ const EditItemForm = () => {
 			},
 		});
 
-		/* temp: solution to optional description field which is causing issues  */
-		if (!values.description) {
-			values.description = ' ';
-		} else if (values.description.length <= 0) {
-			values.description = ' ';
-		}
-
 		const res = await dispatch(
 			editItem({
 				...values,
 				userId: parseInt(session!.user.id),
 				currencyId: 1,
 				id: parseInt(params.itemId),
-				description: ' sd',
+				description: !values.description ? ' ' : values.description,
 			}),
 		);
+
+		if (res.type.includes('success') || res.type.includes('fulfilled')) {
+			toast.success('Item edited successfully!', {
+				id: toastId,
+				duration: 5000,
+			});
+		} else {
+			toast.error('Something went wrong!', {
+				id: toastId,
+				duration: 10000,
+			});
+		}
 	};
 
 	return (
