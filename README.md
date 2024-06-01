@@ -29,8 +29,8 @@
 1. Manage items
    -  Edit (all the fields)
       -  [x] UI
-      -  [ ] Frontend State management
-      -  [ ] Backend
+      -  [x] Frontend State management
+      -  [x] Backend
    -  Delete
       -  [x] UI
       -  [x] Frontend State management
@@ -54,8 +54,8 @@
    -  [ ] Backend
 1. Auth - NextAuth
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [x] Frontend State management
+   -  [x] Backend
 
 ## Terminologies
 
