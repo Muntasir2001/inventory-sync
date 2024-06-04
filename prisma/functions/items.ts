@@ -48,8 +48,6 @@ export const getAllItems = async ({ userId }: GetAllItems) => {
 export const addItem = async ({ item }: AddItem) => {
 	let res: Items | undefined;
 
-	console.log('adding item');
-
 	await prisma.items
 		.create({ data: item })
 		.then((d) => {

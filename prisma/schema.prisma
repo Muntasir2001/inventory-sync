@@ -20,6 +20,7 @@ model Users {
   lastName  String
   email     String
   items     Items[]
+  sales     Sales[]
   password  String
 
   @@unique([email])
@@ -54,6 +55,8 @@ model Sales {
   price      Int
   currencyId Int
   itemId     Int
+  userId     Int
+  user       Users      @relation(fields: [userId], references: [id])
   currency   Currencies @relation(fields: [currencyId], references: [id])
   item       Items      @relation(fields: [itemId], references: [id])
 }

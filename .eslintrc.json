@@ -3,19 +3,24 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"prettier",
-		"next/core-web-vitals"
+		"next/core-web-vitals",
+		"next"
 	],
 	"parser": "@typescript-eslint/parser",
 	"plugins": ["@typescript-eslint"],
 	"rules": {
-		"no-else-return": "error",
-		"object-shorthand": "error"
-		/**
-		 *  `no-return-await` disabled due to:
-		 * source(1): https://eslint.org/docs/latest/rules/no-return-await
-		 * source(2): https://v8.dev/blog/fast-async (near the end)
-		 */
-		// "no-return-await": "error"
+		"@typescript-eslint/restrict-template-expressions": "off",
+		"@typescript-eslint/consistent-type-imports": [
+			"warn",
+			{
+				"prefer": "type-imports",
+				"fixStyle": "inline-type-imports"
+			}
+		],
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{ "argsIgnorePattern": "^_" }
+		]
 	},
 	"parserOptions": {
 		"ecmaVersion": 2022,
