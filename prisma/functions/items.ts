@@ -24,6 +24,11 @@ interface EditItem {
 	item: Items;
 }
 
+interface DecrementItemQuantityByQuantity {
+	id: number;
+	quantitySold: number;
+}
+
 interface GetAllItems {
 	userId: number;
 }
@@ -33,6 +38,30 @@ export const getAllItems = async ({ userId }: GetAllItems) => {
 
 	await prisma.items
 		.findMany({ where: { userId } })
+		.then((d) => {
+			items = d;
+		})
+		.catch((e) => {
+			console.log('getAllItemsError', e);
+
+			throw new Error('Something went wrong');
+		});
+
+	return items;
+};
+
+export const getAllItemsInStock = async ({ userId }: GetAllItems) => {
+	let items: Array<Items> = [];
+
+	await prisma.items
+		.findMany({
+			where: {
+				userId,
+				quantity: {
+					gt: 0,
+				},
+			},
+		})
 		.then((d) => {
 			items = d;
 		})
@@ -88,6 +117,35 @@ export const editItem = async ({ item }: EditItem) => {
 				id: item.id,
 			},
 			data: item,
+		})
+		.then((d) => {
+			res = d;
+		})
+		.catch((e) => {
+			console.log('editItemError', e);
+
+			throw new Error('Something went wrong');
+		});
+
+	return res;
+};
+
+export const decrementItemQuantityByQuantity = async ({
+	id,
+	quantitySold,
+}: DecrementItemQuantityByQuantity) => {
+	let res: Items | undefined;
+
+	await prisma.items
+		.update({
+			where: {
+				id,
+			},
+			data: {
+				quantity: {
+					decrement: quantitySold,
+				},
+			},
 		})
 		.then((d) => {
 			res = d;

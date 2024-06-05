@@ -29,7 +29,7 @@ const ItemList = () => {
 	const { data: session, status: authStatus } = useSession();
 
 	useEffect(() => {
-		if (authStatus === 'authenticated' && users) {
+		if (authStatus === 'authenticated' && users && items.length < 1) {
 			dispatch(getAllItems(parseInt(session.user.id)));
 
 			if (items != undefined) setLoading(false);

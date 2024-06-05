@@ -5,6 +5,7 @@ import {
 	addItem as prismaAddItem,
 	deleteItem as prismaDeleteItem,
 	editItem as prismaEditItem,
+	decrementItemQuantityByQuantity as prismaDecrementItemQuantityByQuantity,
 } from '@/prisma/functions/items';
 import type { Items } from '@prisma/client';
 
@@ -34,6 +35,19 @@ const itemsSlice = createSlice({
 				state.data[index] = action.payload;
 			}
 		});
+
+		builder.addCase(
+			decrementItemQuantityByQuantity.fulfilled,
+			(state, action) => {
+				if (action.payload) {
+					const index = state.data.findIndex(
+						(d) => d.id === action.payload?.id,
+					);
+
+					state.data[index] = action.payload;
+				}
+			},
+		);
 
 		builder.addCase(
 			getAllItems.fulfilled,
@@ -116,6 +130,23 @@ export const editItem = createAsyncThunk(
 		let res: Items | undefined;
 
 		await prismaEditItem({ item })
+			.then((d) => {
+				res = d;
+			})
+			.catch((e) => {
+				throw e;
+			});
+
+		return res;
+	},
+);
+
+export const decrementItemQuantityByQuantity = createAsyncThunk(
+	'items/decrementItemQuantityByQuantity',
+	async ({ id, quantitySold }: { id: number; quantitySold: number }) => {
+		let res: Items | undefined;
+
+		await prismaDecrementItemQuantityByQuantity({ id, quantitySold })
 			.then((d) => {
 				res = d;
 			})

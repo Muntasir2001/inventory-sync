@@ -28,7 +28,7 @@ const SalesList = () => {
 	const sales = useAppSelector(selectSales);
 
 	useEffect(() => {
-		if (authStatus === 'authenticated') {
+		if (authStatus === 'authenticated' && sales.length < 1) {
 			dispatch(getAllSales(parseInt(session.user.id)));
 
 			if (sales != undefined) setLoading(false);
@@ -36,56 +36,6 @@ const SalesList = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authStatus, sales.length]);
-
-	const salesList: Array<{
-		iconClass: string;
-		text: string;
-		date: string;
-		amount: string;
-	}> = [
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-		{
-			iconClass: 'arrow-right-down-fill',
-			text: 'Abaya Sale',
-			date: '10 Mar 2024',
-			amount: '+£2000',
-		},
-	];
 
 	return (
 		<>

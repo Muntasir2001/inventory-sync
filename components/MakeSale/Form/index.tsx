@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
 
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -28,22 +29,40 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import items from '@/data/items';
+import { getAllItems } from '@/redux/items/itemsSlice';
 import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
+import { selectItems } from '@/redux/items/selectors';
+import { addSale } from '@/redux/sale/saleSlice';
+import { useSession } from 'next-auth/react';
 
 const MakeSaleForm = () => {
 	const [saleDate, setSaleDate] = useState<Date | undefined>(new Date());
 
-	const selectItems = items.map((i) => ({ label: i.name, value: i.id }));
+	const dispatch = useAppDispatch();
+	const { data: session, status: authStatus } = useSession();
+	const items = useAppSelector(selectItems);
+
+	useEffect(() => {
+		if (authStatus === 'authenticated' && items.length < 1) {
+			dispatch(getAllItems(parseInt(session.user.id)));
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [authStatus, items.length]);
+
+	const mappedItems = items
+		.filter((i) => i.quantity > 0)
+		.map((i) => ({ label: i.name, value: i.id }));
 
 	const FormSchema = z.object({
 		item: z.number({
 			required_error: 'Please select a item.',
 		}),
 		title: z.string(),
-		quantity: z.string(),
-		price: z.number(),
+		quantity: z.coerce.number(),
+		price: z.coerce.number(),
 		saleDate: z.date(),
 	});
 
@@ -51,7 +70,36 @@ const MakeSaleForm = () => {
 		resolver: zodResolver(FormSchema),
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {}
+	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		const toastId = toast.loading('Recording sale...', {
+			style: {
+				textAlign: 'center',
+			},
+		});
+
+		console.log('values', values);
+
+		const res = await dispatch(
+			addSale({
+				...values,
+				userId: parseInt(session!.user.id),
+				currencyId: 1,
+				itemId: values.item,
+			}),
+		);
+
+		if (res.type.includes('success') || res.type.includes('fulfilled')) {
+			toast.success('Sale recorded successfully!', {
+				id: toastId,
+				duration: 5000,
+			});
+		} else {
+			toast.error('Something went wrong!', {
+				id: toastId,
+				duration: 10000,
+			});
+		}
+	};
 
 	return (
 		<>
@@ -79,7 +127,7 @@ const MakeSaleForm = () => {
 												}`}
 											>
 												{field.value
-													? selectItems.find(
+													? mappedItems.find(
 															(s) => s.value === field.value,
 													  )?.label
 													: 'Select item'}
@@ -93,7 +141,7 @@ const MakeSaleForm = () => {
 											<CommandList>
 												<CommandEmpty>No items found.</CommandEmpty>
 												<CommandGroup>
-													{selectItems.map((s) => (
+													{mappedItems.map((s) => (
 														<CommandItem
 															value={s.label}
 															key={s.value}
