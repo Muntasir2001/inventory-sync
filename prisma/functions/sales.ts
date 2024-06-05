@@ -12,6 +12,7 @@ interface AddSale {
 		currencyId: number;
 		itemId: number;
 		userId: number;
+		saleDate: Date;
 	};
 }
 

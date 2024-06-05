@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+
+import { useSession } from 'next-auth/react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -12,11 +14,30 @@ import {
 	PopoverTrigger,
 } from '@/components/ui/popover';
 import SaleCard from '../SaleCard';
+import { selectSales } from '@/redux/sale/selectors';
+import { useAppSelector } from '@/redux/store';
+import { useAppDispatch } from '@/redux/store';
+import { getAllSales } from '@/redux/sale/saleSlice';
 
 const SalesList = () => {
 	const [date, setDate] = useState<Date | undefined>();
+	const [loading, setLoading] = useState<boolean>(true);
 
-	const sales: Array<{
+	const { data: session, status: authStatus } = useSession();
+	const dispatch = useAppDispatch();
+	const sales = useAppSelector(selectSales);
+
+	useEffect(() => {
+		if (authStatus === 'authenticated') {
+			dispatch(getAllSales(parseInt(session.user.id)));
+
+			if (sales != undefined) setLoading(false);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [authStatus, sales.length]);
+
+	const salesList: Array<{
 		iconClass: string;
 		text: string;
 		date: string;
@@ -111,15 +132,27 @@ const SalesList = () => {
 					</Popover>
 				</div>
 				<div className='flex flex-col gap-4'>
-					{sales.map((s, i) => (
-						<SaleCard
-							iconClass={s.iconClass}
-							text={s.text}
-							date={s.date}
-							amount={s.amount}
-							key={i}
-						/>
-					))}
+					{loading && (
+						<p className='font-bold text-xl text-gray'>
+							Loading items...
+						</p>
+					)}
+
+					{!loading && sales && sales.length > 0
+						? sales.map((s, i) => (
+								<SaleCard
+									iconClass='arrow-right-down-fill'
+									text={s.title}
+									date={s.saleDate}
+									amount={s.price}
+									key={i}
+								/>
+						  ))
+						: !loading && (
+								<p className='font-bold text-xl text-gray'>
+									You haven't made any sales
+								</p>
+						  )}
 				</div>
 			</div>
 		</>

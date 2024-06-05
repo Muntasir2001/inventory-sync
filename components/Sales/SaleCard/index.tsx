@@ -1,8 +1,8 @@
 interface Props {
 	iconClass: string;
 	text: string;
-	date: string;
-	amount: string;
+	date: Date;
+	amount: number;
 }
 
 const SaleCard = ({ iconClass, text, date, amount }: Props) => {
@@ -15,7 +15,7 @@ const SaleCard = ({ iconClass, text, date, amount }: Props) => {
 
 				<div className='flex flex-col gap-1 ml-5 mr-auto'>
 					<p className='text-black font-medium'>{text}</p>
-					<p className='text-sm text-gray'>{date}</p>
+					<p className='text-sm text-gray'>{date.getDate()}</p>
 				</div>
 
 				<div>

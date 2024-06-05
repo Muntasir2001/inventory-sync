@@ -9,7 +9,7 @@ import {
 import type { Sales } from '@prisma/client';
 
 interface SaleState {
-	data?: Array<Sales>;
+	data: Array<Sales>;
 }
 
 const initialState: SaleState = {
@@ -49,6 +49,7 @@ export const addSale = createAsyncThunk(
 		currencyId: number;
 		itemId: number;
 		userId: number;
+		saleDate: Date;
 	}) => {
 		let res: Sales | undefined;
 
