@@ -7,6 +7,7 @@ import {
 	editSale as prismaEditSale,
 } from '@/prisma/functions/sales';
 import type { Sales } from '@prisma/client';
+import { decrementItemQuantityByQuantity } from '../items/itemsSlice';
 
 interface SaleState {
 	data: Array<Sales>;
@@ -20,7 +21,11 @@ const salesSlice = createSlice({
 	name: 'sales',
 	initialState,
 	reducers: {},
-	extraReducers: (builder) => {},
+	extraReducers: (builder) => {
+		builder.addCase(addSale.fulfilled, (state, action) => {
+			if (action.payload) state.data?.push(action.payload);
+		});
+	},
 });
 
 export const getAllSales = createAsyncThunk(
@@ -42,15 +47,18 @@ export const getAllSales = createAsyncThunk(
 
 export const addSale = createAsyncThunk(
 	'sales/addSale',
-	async (sale: {
-		title: string;
-		quantity: number;
-		price: number;
-		currencyId: number;
-		itemId: number;
-		userId: number;
-		saleDate: Date;
-	}) => {
+	async (
+		sale: {
+			title: string;
+			quantity: number;
+			price: number;
+			currencyId: number;
+			itemId: number;
+			userId: number;
+			saleDate: Date;
+		},
+		{ dispatch },
+	) => {
 		let res: Sales | undefined;
 
 		await prismaAddSale({ sale })
@@ -60,6 +68,13 @@ export const addSale = createAsyncThunk(
 			.catch((e) => {
 				throw e;
 			});
+
+		dispatch(
+			decrementItemQuantityByQuantity({
+				id: sale.itemId,
+				quantitySold: sale.quantity,
+			}),
+		);
 
 		return res;
 	},

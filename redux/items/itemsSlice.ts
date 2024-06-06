@@ -158,5 +158,5 @@ export const decrementItemQuantityByQuantity = createAsyncThunk(
 	},
 );
 
-// export const {} = itemsSlice.actions;
+export const {} = itemsSlice.actions;
 export default itemsSlice.reducer;

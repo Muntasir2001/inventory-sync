@@ -38,7 +38,7 @@ import { addSale } from '@/redux/sale/saleSlice';
 import { useSession } from 'next-auth/react';
 
 const MakeSaleForm = () => {
-	const [saleDate, setSaleDate] = useState<Date | undefined>(new Date());
+	const [saleDate, setSaleDate] = useState<Date>(new Date());
 
 	const dispatch = useAppDispatch();
 	const { data: session, status: authStatus } = useSession();
@@ -57,7 +57,7 @@ const MakeSaleForm = () => {
 		.map((i) => ({ label: i.name, value: i.id }));
 
 	const FormSchema = z.object({
-		item: z.number({
+		itemId: z.number({
 			required_error: 'Please select a item.',
 		}),
 		title: z.string(),
@@ -68,6 +68,13 @@ const MakeSaleForm = () => {
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
+		defaultValues: {
+			itemId: 0,
+			title: '',
+			quantity: 0,
+			price: 0,
+			saleDate: new Date(),
+		},
 	});
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
@@ -77,14 +84,23 @@ const MakeSaleForm = () => {
 			},
 		});
 
-		console.log('values', values);
+		const selectedItem = items.find((i) => i.id === values.itemId);
+
+		if (selectedItem && values.quantity > selectedItem?.quantity) {
+			toast.error("You can't sell more items than it exists in stock!", {
+				id: toastId,
+				duration: 10000,
+			});
+
+			return;
+		}
 
 		const res = await dispatch(
 			addSale({
 				...values,
 				userId: parseInt(session!.user.id),
 				currencyId: 1,
-				itemId: values.item,
+				saleDate,
 			}),
 		);
 
@@ -110,7 +126,7 @@ const MakeSaleForm = () => {
 				>
 					<FormField
 						control={form.control}
-						name='item'
+						name='itemId'
 						render={({ field }) => (
 							<FormItem className='flex flex-col'>
 								<FormLabel className='text-black font-bold'>
@@ -146,7 +162,10 @@ const MakeSaleForm = () => {
 															value={s.label}
 															key={s.value}
 															onSelect={() => {
-																form.setValue('item', s.value);
+																form.setValue(
+																	'itemId',
+																	s.value,
+																);
 															}}
 															className={`aria-selected:bg-dark-white ${
 																s.value === field.value
@@ -201,7 +220,7 @@ const MakeSaleForm = () => {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-black font-bold'>
-									Quantity
+									Quantity Sold
 								</FormLabel>
 								<FormControl>
 									<Input
@@ -223,7 +242,7 @@ const MakeSaleForm = () => {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-black font-bold'>
-									Price
+									Total Price
 								</FormLabel>
 								<FormControl>
 									<Input
@@ -273,7 +292,14 @@ const MakeSaleForm = () => {
 											<Calendar
 												mode='single'
 												selected={saleDate}
-												onSelect={setSaleDate}
+												onSelect={(d) => {
+													if (d) {
+														const sd = new Date();
+														sd.setDate(d.getDate());
+
+														setSaleDate(sd);
+													}
+												}}
 												disabled={(date) =>
 													date > new Date() ||
 													date < new Date('1900-01-01')
