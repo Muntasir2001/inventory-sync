@@ -28,10 +28,6 @@ const SalesList = () => {
 	const sales = useAppSelector(selectSales);
 
 	useEffect(() => {
-		console.log('loading items');
-		console.log('authStatus', authStatus);
-		console.log('sales', sales);
-
 		if (authStatus === 'authenticated' && sales.length < 1) {
 			dispatch(getAllSales(parseInt(session.user.id)));
 		}
