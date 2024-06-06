@@ -24,6 +24,7 @@
    -  [x] Backend
 1. View items
    -  [x] UI
+   -  [ ] UI - Filter data using available filter tools
    -  [x] Frontend State management
    -  [x] Backend
 1. Manage items
@@ -36,8 +37,8 @@
       -  [x] Frontend State management
       -  [x] Backend
    -  Update quantity when there is a sale (this would done through **Make Sale** page)
-      -  [ ] Frontend State management
-      -  [ ] Backend
+      -  [x] Frontend State management
+      -  [x] Backend
 1. See all Sales
    -  **Structure:**
       -  Item sold
@@ -46,12 +47,13 @@
       -  Price sold
       -  Sale date
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [ ] UI - Filter data using available filter tools
+   -  [x] Frontend State management
+   -  [x] Backend
 1. Make Sale
    -  [x] UI
-   -  [ ] Frontend State management
-   -  [ ] Backend
+   -  [x] Frontend State management
+   -  [x] Backend
 1. Auth - NextAuth
    -  [x] UI
    -  [x] Frontend State management
