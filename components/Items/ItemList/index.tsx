@@ -29,11 +29,13 @@ const ItemList = () => {
 	const { data: session, status: authStatus } = useSession();
 
 	useEffect(() => {
-		if (authStatus === 'authenticated' && users && items.length < 1) {
-			dispatch(getAllItems(parseInt(session.user.id)));
+		if (authStatus === 'authenticated' && items.length < 1) {
+			console.log('loading items 2');
 
-			if (items != undefined) setLoading(false);
+			dispatch(getAllItems(parseInt(session.user.id)));
 		}
+
+		setLoading(false);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authStatus, users, items.length]);

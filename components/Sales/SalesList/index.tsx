@@ -28,11 +28,15 @@ const SalesList = () => {
 	const sales = useAppSelector(selectSales);
 
 	useEffect(() => {
+		console.log('loading items');
+		console.log('authStatus', authStatus);
+		console.log('sales', sales);
+
 		if (authStatus === 'authenticated' && sales.length < 1) {
 			dispatch(getAllSales(parseInt(session.user.id)));
-
-			if (sales != undefined) setLoading(false);
 		}
+
+		setLoading(false);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authStatus, sales.length]);
@@ -84,7 +88,7 @@ const SalesList = () => {
 				<div className='flex flex-col gap-4'>
 					{loading && (
 						<p className='font-bold text-xl text-gray'>
-							Loading items...
+							Loading sales...
 						</p>
 					)}
 
