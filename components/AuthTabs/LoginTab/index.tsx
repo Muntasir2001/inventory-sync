@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { authenticate } from '@/lib/actions';
+import { authenticate } from '@/lib.old/actions';
 
 const LoginTab = () => {
 	const [email, setEmail] = useState<string>('');

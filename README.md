@@ -58,6 +58,10 @@
    -  [x] UI
    -  [x] Frontend State management
    -  [x] Backend
+1. Switch to Auth0
+   -  [] UI
+   -  [] Frontend State management
+   -  [] Backend
 
 ## Terminologies
 

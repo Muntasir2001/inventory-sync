@@ -2,7 +2,7 @@
 
 import SidebarLink from './SidebarLink';
 import { Button } from '@/components/ui/button';
-import { logOut } from '@/lib/actions';
+import { logOut } from '@/lib.old/actions';
 
 const Sidebar = () => {
 	const links: Array<{ href: string; text: string }> = [

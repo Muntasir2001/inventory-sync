@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import 'remixicon/fonts/remixicon.css';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import Topbar from '@/components/Topbar';
-import '../globals.css';
 import Providers from '@/redux/Provider';
+import '../globals.css';
 
 export const metadata: Metadata = {
 	title: 'Inventory Sync',
@@ -17,10 +18,12 @@ export default function DashboardLayout({
 }>) {
 	return (
 		<Providers>
-			<div className={`min-h-screen bg-white`}>
-				<Topbar />
-				{children}
-			</div>
+			<UserProvider>
+				<div className={`min-h-screen bg-white`}>
+					<Topbar />
+					{children}
+				</div>
+			</UserProvider>
 		</Providers>
 	);
 }
