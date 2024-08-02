@@ -1,7 +1,9 @@
 export default function Home() {
 	return (
 		<>
-			<div>hello</div>
+			<div className='text-black p-10'>
+				<a href='/api/auth/login'>Login</a>
+			</div>
 		</>
 	);
 }

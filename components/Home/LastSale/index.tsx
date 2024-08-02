@@ -1,6 +1,6 @@
 import SaleCard from './SaleCard';
 
-const LastSale = () => {
+const LastSale = async () => {
 	return (
 		<>
 			<div className='flex flex-col gap-4 mt-10 pb-6 px-5'>

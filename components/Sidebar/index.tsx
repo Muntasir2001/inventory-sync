@@ -1,8 +1,5 @@
-'use client';
-
 import SidebarLink from './SidebarLink';
 import { Button } from '@/components/ui/button';
-import { logOut } from '@/lib.old/actions';
 
 const Sidebar = () => {
 	const links: Array<{ href: string; text: string }> = [
@@ -29,11 +26,8 @@ const Sidebar = () => {
 						</li>
 					))}
 					<li className='mt-auto'>
-						<Button
-							className='bg-dark-red text-black'
-							onClick={async () => await logOut()}
-						>
-							Log Out
+						<Button className='bg-dark-red text-black'>
+							<a href='/api/auth/logout'>Log Out</a>
 						</Button>
 					</li>
 				</ul>
