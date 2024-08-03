@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 import { AppDispatch, RootState } from '@/redux/store';
 import { getFilteredUserInfoByEmail } from '@/prisma/functions/users';
@@ -9,11 +10,12 @@ import { setUser } from './user/userSlice';
 
 const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	const dispatch = useDispatch<AppDispatch>();
-	const user = useSelector((state: RootState) => state.user.data);
+	const userState = useSelector((state: RootState) => state.user.data);
 	const { data: session, status } = useSession();
+	const { user } = useUser();
 
 	const storeUser = async () => {
-		if (user || !session || !session.user || !session.user.email) {
+		if (userState || !user || !user.email) {
 			return;
 		}
 
@@ -21,7 +23,7 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 			console.log('session', session);
 
 			const userPrisma = await getFilteredUserInfoByEmail({
-				email: session.user.email,
+				email: user.email,
 			});
 
 			if (userPrisma) {

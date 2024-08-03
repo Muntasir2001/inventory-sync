@@ -8,7 +8,7 @@ import LastSale from '@/components/Home/LastSale';
 
 const Dashboard: NextPage = withPageAuthRequired(
 	async () => {
-		const session = await getSession();
+		// const session = await getSession();
 
 		// console.log('session', session?.user);
 
