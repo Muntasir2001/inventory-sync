@@ -18,12 +18,10 @@ model Users {
   createdAt DateTime @default(now())
   firstName String
   lastName  String
-  email     String
+  auth0Id   String   @unique
+  email     String   @unique
   items     Items[]
   sales     Sales[]
-  password  String
-
-  @@unique([email])
 }
 
 model Currencies {

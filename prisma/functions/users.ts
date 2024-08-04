@@ -2,7 +2,6 @@
 
 import { Prisma } from '@prisma/client';
 
-import { hashPassword } from '@/auth.utils';
 import { prisma } from '../prisma';
 
 interface GetUserByEmail {
@@ -13,7 +12,7 @@ interface CreateUser {
 	firstName: string;
 	lastName: string;
 	email: string;
-	password: string;
+	auth0Id: string;
 }
 
 export const getUserByEmail = async ({ email }: GetUserByEmail) => {
@@ -62,17 +61,15 @@ export const createUser = async ({
 	firstName,
 	lastName,
 	email,
-	password,
+	auth0Id,
 }: CreateUser) => {
-	const hashedPassword = hashPassword(password);
-
 	await prisma.users
 		.create({
 			data: {
 				firstName,
 				lastName,
 				email,
-				password: hashedPassword,
+				auth0Id,
 			},
 		})
 		.then((u) => {
