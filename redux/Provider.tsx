@@ -1,15 +1,18 @@
 'use client';
 
 import { Provider } from 'react-redux';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { store } from './store';
+import StoreUserInfo from './StoreUserInfo';
+import { AuthContextWrapper } from '@/Context/AuthContext';
 
 function Providers({ children }: { children: React.ReactNode }) {
 	return (
-		<UserProvider>
-			<Provider store={store}>{children}</Provider>
-		</UserProvider>
+		<Provider store={store}>
+			<AuthContextWrapper>
+				<StoreUserInfo>{children}</StoreUserInfo>
+			</AuthContextWrapper>
+		</Provider>
 	);
 }
 

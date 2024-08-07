@@ -12,7 +12,7 @@ interface CreateUser {
 	firstName: string;
 	lastName: string;
 	email: string;
-	auth0Id: string;
+	firebaseAuthId: string;
 }
 
 export const getUserByEmail = async ({ email }: GetUserByEmail) => {
@@ -61,7 +61,7 @@ export const createUser = async ({
 	firstName,
 	lastName,
 	email,
-	auth0Id,
+	firebaseAuthId,
 }: CreateUser) => {
 	await prisma.users
 		.create({
@@ -69,7 +69,7 @@ export const createUser = async ({
 				firstName,
 				lastName,
 				email,
-				auth0Id,
+				firebaseAuthId,
 			},
 		})
 		.then((u) => {

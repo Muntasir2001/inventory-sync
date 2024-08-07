@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import toast from 'react-hot-toast';
 
@@ -15,11 +17,13 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { authenticate } from '@/lib/actions';
+import { login } from '@/firebase/functions/auth';
 
 const LoginTab = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+
+	const router = useRouter();
 
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.currentTarget.value);
@@ -32,26 +36,23 @@ const LoginTab = () => {
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const toastId = toast.loading('Logging you in...', {
-			style: {
-				textAlign: 'center',
-			},
-		});
+		const toastId = toast.loading('Logging you in...');
 
-		const res = await authenticate(email, password);
+		const { result, error } = await login({ email, password });
 
-		if (res?.type === 'error') {
-			toast.error(res.error, {
+		if (error) {
+			toast.error(`Login failed! ${error.toString().split(':')[2]}`, {
 				id: toastId,
 				duration: 10000,
 			});
-
 			return;
 		}
 
 		toast.success('Signed in successfully!', {
 			id: toastId,
 		});
+
+		router.push('/dashboard');
 	};
 
 	return (
@@ -94,13 +95,19 @@ const LoginTab = () => {
 							/>
 						</div>
 					</CardContent>
-					<CardFooter>
+					<CardFooter className='flex flex-col items-start gap-2'>
 						<Button
 							type='submit'
 							className='bg-primary text-black hover:bg-primary hover:brightness-90'
 						>
 							Login
 						</Button>
+						<Link
+							className='text-gray-600 text-sm hover:underline'
+							href='/reset-password'
+						>
+							Forgot password?
+						</Link>
 					</CardFooter>
 				</form>
 			</Card>

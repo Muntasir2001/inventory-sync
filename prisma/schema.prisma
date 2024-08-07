@@ -14,14 +14,14 @@ datasource db {
 }
 
 model Users {
-  id        Int      @id @default(sequence())
-  createdAt DateTime @default(now())
-  firstName String
-  lastName  String
-  auth0Id   String   @unique
-  email     String   @unique
-  items     Items[]
-  sales     Sales[]
+  id             Int      @id @default(sequence())
+  createdAt      DateTime @default(now())
+  firstName      String
+  lastName       String
+  firebaseAuthId String   @unique
+  email          String   @unique
+  items          Items[]
+  sales          Sales[]
 }
 
 model Currencies {

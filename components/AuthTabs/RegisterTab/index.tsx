@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import toast from 'react-hot-toast';
 
@@ -16,12 +18,15 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { createUser } from '@/prisma/functions/users';
+import { register } from '@/firebase/functions/auth';
 
 const RegisterTab = () => {
 	const [firstName, setFirstName] = useState<string>('');
 	const [lastName, setLastName] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+
+	const router = useRouter();
 
 	const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFirstName(e.currentTarget.value);
@@ -42,46 +47,32 @@ const RegisterTab = () => {
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const toastId = toast.loading('Creating account...', {
-			style: {
-				textAlign: 'center',
-			},
-		});
+		const toastId = toast.loading('Logging you in...');
 
-		if (
-			firstName.length < 1 ||
-			lastName.length < 1 ||
-			email.length < 1 ||
-			password.length < 1
-		) {
-			toast.error(
-				'One of the fields is empty. Please make sure you have filled out the entire form!',
-				{
-					id: toastId,
-				},
-			);
+		const { result, error } = await register({ email, password });
+
+		if (error) {
+			toast.error(`Registration failed! ${error.toString().split(':')[2]}`, {
+				id: toastId,
+				duration: 10000,
+			});
 
 			return;
 		}
 
-		try {
-			await createUser({
-				firstName,
-				lastName,
-				email,
-				password,
-			});
+		await createUser({
+			firstName,
+			lastName,
+			email,
+			firebaseAuthId: result!.user.uid,
+		});
 
-			toast.success('Account created successfully! Please sign in now.', {
-				id: toastId,
-				duration: 10000,
-			});
-		} catch (err: any) {
-			toast.error(err.toString(), {
-				id: toastId,
-				duration: 10000,
-			});
-		}
+		toast.success('Account created successfully! Please sign in now.', {
+			id: toastId,
+			duration: 10000,
+		});
+
+		router.push('/dashboard');
 	};
 
 	return (
@@ -158,13 +149,19 @@ const RegisterTab = () => {
 							/>
 						</div>
 					</CardContent>
-					<CardFooter>
+					<CardFooter className='flex flex-col gap-4 items-start'>
 						<Button
 							type='submit'
 							className='bg-primary text-black hover:bg-primary hover:brightness-90'
 						>
 							Create Account
 						</Button>
+						<Link
+							className='text-light-white text-sm hover:underline'
+							href='/reset-password'
+						>
+							Forgot password?
+						</Link>
 					</CardFooter>
 				</form>
 			</Card>

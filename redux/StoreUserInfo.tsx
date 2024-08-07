@@ -1,27 +1,20 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useSession } from 'next-auth/react';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useDispatch } from 'react-redux';
 
-import { AppDispatch, RootState } from '@/redux/store';
+import { AppDispatch } from '@/redux/store';
 import { getFilteredUserInfoByEmail } from '@/prisma/functions/users';
 import { setUser } from './user/userSlice';
+import { useAuthContext } from '@/Context/AuthContext';
 
 const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	const dispatch = useDispatch<AppDispatch>();
-	const userState = useSelector((state: RootState) => state.user.data);
-	const { data: session, status } = useSession();
-	const { user } = useUser();
+	const { user } = useAuthContext();
+	const router = useRouter();
 
 	const storeUser = async () => {
-		if (userState || !user || !user.email) {
-			return;
-		}
-
-		if (status === 'authenticated') {
-			console.log('session', session);
-
+		if (user) {
 			const userPrisma = await getFilteredUserInfoByEmail({
 				email: user.email,
 			});
@@ -33,9 +26,10 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
+		if (user == null) router.push('/auth');
+
 		storeUser();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status]);
+	}, [user]);
 
 	return <>{children}</>;
 };
