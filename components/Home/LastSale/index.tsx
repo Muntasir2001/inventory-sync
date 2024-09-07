@@ -1,6 +1,6 @@
-'use client';
+// 'use client';
 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 import SaleCard from './SaleCard';
 import { getAllSales } from '@/redux/sale/saleSlice';
@@ -10,19 +10,19 @@ import { useAppSelector } from '@/redux/store';
 import { useAppDispatch } from '@/redux/store';
 
 const LastSale = async () => {
-	const [loading, setLoading] = useState<boolean>(true);
+	// const [loading, setLoading] = useState<boolean>(true);
 
-	const dispatch = useAppDispatch();
-	const sales = useAppSelector(selectSales);
-	const user = useAppSelector(selectUser);
+	// const dispatch = useAppDispatch();
+	// const sales = useAppSelector(selectSales);
+	// const user = useAppSelector(selectUser);
 
-	useEffect(() => {
-		if (user && sales.length < 1) {
-			dispatch(getAllSales(user.id));
-		}
+	// useEffect(() => {
+	// 	if (user && sales.length < 1) {
+	// 		dispatch(getAllSales(user.id));
+	// 	}
 
-		setLoading(false);
-	}, [user, sales.length]);
+	// 	setLoading(false);
+	// }, [user, sales.length]);
 
 	return (
 		<>
