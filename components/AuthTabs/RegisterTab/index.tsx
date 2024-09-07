@@ -47,7 +47,7 @@ const RegisterTab = () => {
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const toastId = toast.loading('Logging you in...');
+		const toastId = toast.loading('Creating your account...');
 
 		const { result, error } = await register({ email, password });
 

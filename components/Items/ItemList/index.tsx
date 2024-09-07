@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
-
 import { Input } from '@/components/ui/input';
 import {
 	Select,
@@ -25,20 +23,17 @@ const ItemList = () => {
 
 	const dispatch = useAppDispatch();
 	const items = useAppSelector(selectItems);
-	const users = useAppSelector(selectUser);
-	const { data: session, status: authStatus } = useSession();
+	const user = useAppSelector(selectUser);
 
 	useEffect(() => {
-		if (authStatus === 'authenticated' && items.length < 1) {
+		if (user && items.length < 1) {
 			console.log('loading items 2');
 
-			dispatch(getAllItems(parseInt(session.user.id)));
+			dispatch(getAllItems(user.id));
 		}
 
 		setLoading(false);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [authStatus, users, items.length]);
+	}, [user, items.length]);
 
 	return (
 		<>

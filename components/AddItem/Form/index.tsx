@@ -1,12 +1,11 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { useAppDispatch } from '@/redux/store';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { addItem } from '@/redux/items/itemsSlice';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,10 +18,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { selectUser } from '@/redux/user/selectors';
 
 const AddItemForm = () => {
 	const dispatch = useAppDispatch();
-	const { data: session } = useSession();
+	const user = useAppSelector(selectUser);
 
 	const formSchema = z.object({
 		name: z.string().max(50),
@@ -53,7 +53,7 @@ const AddItemForm = () => {
 		const res = await dispatch(
 			addItem({
 				...values,
-				userId: parseInt(session!.user.id),
+				userId: user!.id,
 				currencyId: 1,
 			}),
 		);
