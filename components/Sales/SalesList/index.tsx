@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
-import { useSession } from 'next-auth/react';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -18,24 +16,23 @@ import { selectSales } from '@/redux/sale/selectors';
 import { useAppSelector } from '@/redux/store';
 import { useAppDispatch } from '@/redux/store';
 import { getAllSales } from '@/redux/sale/saleSlice';
+import { selectUser } from '@/redux/user/selectors';
 
 const SalesList = () => {
 	const [date, setDate] = useState<Date | undefined>();
 	const [loading, setLoading] = useState<boolean>(true);
 
-	const { data: session, status: authStatus } = useSession();
 	const dispatch = useAppDispatch();
 	const sales = useAppSelector(selectSales);
+	const user = useAppSelector(selectUser);
 
 	useEffect(() => {
-		if (authStatus === 'authenticated' && sales.length < 1) {
-			dispatch(getAllSales(parseInt(session.user.id)));
+		if (user && sales.length < 1) {
+			dispatch(getAllSales(user.id));
 		}
 
 		setLoading(false);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [authStatus, sales.length]);
+	}, [user, sales.length]);
 
 	return (
 		<>

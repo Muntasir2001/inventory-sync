@@ -35,22 +35,22 @@ import { Calendar } from '@/components/ui/calendar';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectItems } from '@/redux/items/selectors';
 import { addSale } from '@/redux/sale/saleSlice';
-import { useSession } from 'next-auth/react';
+import { selectUser } from '@/redux/user/selectors';
 
 const MakeSaleForm = () => {
 	const [saleDate, setSaleDate] = useState<Date>(new Date());
 
+	const user = useAppSelector(selectUser);
 	const dispatch = useAppDispatch();
-	const { data: session, status: authStatus } = useSession();
 	const items = useAppSelector(selectItems);
 
 	useEffect(() => {
-		if (authStatus === 'authenticated' && items.length < 1) {
-			dispatch(getAllItems(parseInt(session.user.id)));
+		if (user && items.length < 1) {
+			dispatch(getAllItems(user.id));
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [authStatus, items.length]);
+	}, [user, items.length]);
 
 	const mappedItems = items
 		.filter((i) => i.quantity > 0)
@@ -98,7 +98,7 @@ const MakeSaleForm = () => {
 		const res = await dispatch(
 			addSale({
 				...values,
-				userId: parseInt(session!.user.id),
+				userId: user!.id,
 				currencyId: 1,
 				saleDate,
 			}),
