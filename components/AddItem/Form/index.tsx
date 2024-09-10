@@ -50,24 +50,26 @@ const AddItemForm = () => {
 			},
 		});
 
-		const res = await dispatch(
-			addItem({
-				...values,
-				userId: user!.id,
-				currencyId: 1,
-			}),
-		);
+		if (user) {
+			const res = await dispatch(
+				addItem({
+					...values,
+					userId: user.id,
+					currencyId: 1,
+				}),
+			);
 
-		if (res.type.includes('success') || res.type.includes('fulfilled')) {
-			toast.success('Item added successfully!', {
-				id: toastId,
-				duration: 5000,
-			});
-		} else {
-			toast.error('Something went wrong!', {
-				id: toastId,
-				duration: 10000,
-			});
+			if (res.type.includes('success') || res.type.includes('fulfilled')) {
+				toast.success('Item added successfully!', {
+					id: toastId,
+					duration: 5000,
+				});
+			} else {
+				toast.error('Something went wrong!', {
+					id: toastId,
+					duration: 10000,
+				});
+			}
 		}
 	};
 

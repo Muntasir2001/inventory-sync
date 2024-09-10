@@ -36,7 +36,7 @@ const SalesList = () => {
 
 	return (
 		<>
-			<div className='flex flex-col gap-12 mt-6'>
+			<div className='flex flex-col gap-5 mt-6'>
 				<div className='flex flex-col gap-3'>
 					<Input
 						className='text-black border-black'
@@ -90,7 +90,7 @@ const SalesList = () => {
 								<SaleCard
 									iconClass='arrow-right-down-fill'
 									text={s.title}
-									date={s.saleDate}
+									date={new Date(s.saleDateTimeString)}
 									amount={s.price}
 									key={i}
 								/>

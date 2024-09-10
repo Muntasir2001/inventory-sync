@@ -3,6 +3,7 @@
 import type { Sales } from '@prisma/client';
 
 import { prisma } from '../prisma';
+import { SaleType } from '@/types/sale';
 
 interface AddSale {
 	sale: {
@@ -12,7 +13,7 @@ interface AddSale {
 		currencyId: number;
 		itemId: number;
 		userId: number;
-		saleDate: Date;
+		saleDateTimeString: string;
 	};
 }
 
@@ -29,10 +30,22 @@ interface GetAllSales {
 }
 
 export const getAllSales = async ({ userId }: GetAllSales) => {
-	let sales: Array<Sales> = [];
+	let sales: Array<SaleType> = [];
 
 	await prisma.sales
-		.findMany({ where: { userId } })
+		.findMany({
+			where: { userId },
+			select: {
+				id: true,
+				title: true,
+				quantity: true,
+				price: true,
+				currencyId: true,
+				itemId: true,
+				userId: true,
+				saleDateTimeString: true,
+			},
+		})
 		.then((d) => {
 			sales = d;
 		})
@@ -46,12 +59,15 @@ export const getAllSales = async ({ userId }: GetAllSales) => {
 };
 
 export const addSale = async ({ sale }: AddSale) => {
-	let res: Sales | undefined;
+	let res: SaleType | undefined;
 
 	await prisma.sales
-		.create({ data: sale })
+		.create({
+			data: { ...sale, saleDate: new Date(sale.saleDateTimeString) },
+		})
 		.then((d) => {
-			res = d;
+			const { saleDate, ...rest } = d;
+			res = rest;
 		})
 		.catch((e) => {
 			console.log('addSaleError', e);

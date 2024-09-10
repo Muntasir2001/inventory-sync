@@ -47,15 +47,16 @@ model Items {
 }
 
 model Sales {
-  id         Int        @id @default(sequence())
-  title      String
-  quantity   Int
-  price      Int
-  currencyId Int
-  itemId     Int
-  userId     Int
-  saleDate   DateTime
-  user       Users      @relation(fields: [userId], references: [id])
-  currency   Currencies @relation(fields: [currencyId], references: [id])
-  item       Items      @relation(fields: [itemId], references: [id])
+  id             Int        @id @default(sequence())
+  title          String
+  quantity       Int
+  price          Int
+  currencyId     Int
+  itemId         Int
+  userId         Int
+  saleDateTimeString String
+  saleDate       DateTime
+  user           Users      @relation(fields: [userId], references: [id])
+  currency       Currencies @relation(fields: [currencyId], references: [id])
+  item           Items      @relation(fields: [itemId], references: [id])
 }
