@@ -31,7 +31,12 @@ const LastSale = () => {
 	useEffect(() => {
 		if (user && sales.length < 1) {
 			dispatch(getAllSales(user.id));
-			setLatestSales(sales.filter((s) => s.saleDateTimeString));
+		}
+
+		if (sales.length > 0 && sales.length > 5) {
+			setLatestSales(sales.splice(sales.length - 5, 5));
+		} else {
+			setLatestSales(sales);
 		}
 
 		setLoading(false);
@@ -42,42 +47,21 @@ const LastSale = () => {
 			<div className='flex flex-col gap-4 mt-10 pb-6 px-5'>
 				<h1 className='text-4xl font-bold text-black'>Last Sale</h1>
 
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
-				<SaleCard
-					iconClass='arrow-right-down-fill'
-					text='Abaya Sale'
-					date='10 Mar 2024'
-					amount='+£2000'
-				/>
+				{!loading && latestSales && latestSales?.length > 0
+					? latestSales.map((l, i) => (
+							<SaleCard
+								iconClass='arrow-right-down-fill'
+								text={l.title}
+								date={new Date(l.saleDateTimeString)}
+								amount={`£${l.price}`}
+								key={i}
+							/>
+					  ))
+					: !loading && (
+							<p className='font-bold text-xl text-gray'>
+								You haven't made any sales
+							</p>
+					  )}
 			</div>
 		</>
 	);

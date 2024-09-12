@@ -32,6 +32,8 @@ interface GetAllSales {
 export const getAllSales = async ({ userId }: GetAllSales) => {
 	let sales: Array<SaleType> = [];
 
+	console.log('getting all sales');
+
 	await prisma.sales
 		.findMany({
 			where: { userId },

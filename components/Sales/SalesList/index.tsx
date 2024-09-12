@@ -31,6 +31,8 @@ const SalesList = () => {
 			dispatch(getAllSales(user.id));
 		}
 
+		console.log(sales);
+
 		setLoading(false);
 	}, [user, sales.length]);
 

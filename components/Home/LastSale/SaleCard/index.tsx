@@ -1,11 +1,13 @@
 interface Props {
 	iconClass: string;
 	text: string;
-	date: string;
+	date: Date;
 	amount: string;
 }
 
 const SaleCard = ({ iconClass, text, date, amount }: Props) => {
+	const fullDate = date.toDateString();
+
 	return (
 		<>
 			<div className='flex items-center mt-7'>
@@ -15,7 +17,7 @@ const SaleCard = ({ iconClass, text, date, amount }: Props) => {
 
 				<div className='flex flex-col gap-1 ml-5 mr-auto'>
 					<p className='text-black font-medium'>{text}</p>
-					<p className='text-sm text-gray'>{date}</p>
+					<p className='text-sm text-gray'>{fullDate}</p>
 				</div>
 
 				<div>
