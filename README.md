@@ -62,6 +62,9 @@
    -  [x] UI
    -  [x] Frontend State management
    -  [x] Backend
+1. Secure/encrypt sensistive data in Redux storage [**POST MVP**]
+   -  [ ] Frontend State management
+   -  [ ] Backend - to generate the encrypted text as well as the key
 
 ## Terminologies
 

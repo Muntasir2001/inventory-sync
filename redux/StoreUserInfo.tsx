@@ -1,5 +1,8 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +15,7 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const { user } = useAuthContext();
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const storeUser = async () => {
 		if (user) {
@@ -26,7 +30,9 @@ const StoreUserInfo = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
-		if (user == null) router.push('/auth');
+		if (!user) router.push('/auth');
+
+		if (user && pathname === '/auth') router.push('/dashboard');
 
 		storeUser();
 	}, [user]);
