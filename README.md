@@ -24,7 +24,7 @@
    -  [x] Backend
 1. View items
    -  [x] UI
-   -  [ ] UI - Filter data using available filter tools
+   -  [x] UI - Filter data using available filter tools
    -  [x] Frontend State management
    -  [x] Backend
 1. Manage items
