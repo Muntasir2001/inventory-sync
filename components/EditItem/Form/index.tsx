@@ -2,7 +2,6 @@
 
 import { useParams } from 'next/navigation';
 
-import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -22,13 +21,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectItems } from '@/redux/items/selectors';
 import { editItem } from '@/redux/items/itemsSlice';
+import { selectUser } from '@/redux/user/selectors';
 
 const EditItemForm = () => {
 	const params = useParams<{ itemId: string }>();
 
-	const { data: session } = useSession();
 	const dispatch = useAppDispatch();
 	const items = useAppSelector(selectItems);
+	const user = useAppSelector(selectUser);
 
 	const filteredItem = items.filter((i) => i.id === parseInt(params.itemId));
 
@@ -68,7 +68,7 @@ const EditItemForm = () => {
 		const res = await dispatch(
 			editItem({
 				...values,
-				userId: parseInt(session!.user.id),
+				userId: user!.id,
 				currencyId: 1,
 				id: parseInt(params.itemId),
 				description: !values.description ? ' ' : values.description,
